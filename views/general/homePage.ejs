@@ -1,0 +1,28 @@
+<%- include('../includes/head.ejs', {pageTitle: pageTitle}) %>
+
+
+<%- include('../includes/navHeader.ejs') %>
+
+<main>
+    <h2>Welcome to Nigeria's NO 1 marketplace for home clearance sales</h2>
+    <div class="product_list_wrapper">
+        <% if (allGoods.length > 0) { %>
+
+            <% for (let goods of allGoods) { %>
+                <div><%= goods.name %></div>
+                <div><%= goods.category %></div>
+                <div><%= goods.location %></div>
+            <% } %>
+
+        <% } else { %>
+            <div>
+                No goods!
+            </div>
+        <% } %>
+
+    </div>
+</main>
+
+
+<%- include('../includes/end.ejs') %>
+

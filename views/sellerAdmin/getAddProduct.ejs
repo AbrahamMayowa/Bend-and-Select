@@ -1,0 +1,29 @@
+<%- include('../includes/head.ejs', {pageTitle: pageTitle}) %>
+
+
+<%- include('../includes/navHeader.ejs') %>
+
+<main>
+   
+    <div class="form-control">
+
+        <form action="/add-product" method="POST">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+        <label for="name">name</label>
+        <input type="text" name="name" id="name">
+
+        <label for=""
+
+
+        
+        
+        </form> 
+       
+
+    </div>
+</main>
+
+
+<%- include('../includes/end.ejs') %>
+
