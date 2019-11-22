@@ -27,11 +27,13 @@ exports.postAddProduct = (req, res, next)=>{
     const condition = req.body.condition
     const image = req.body.image
     const location = req.body.location
+    const description = req.body.description
 
     const goods = new Goods({
         name: name,
         category: category,
         condition: condition,
+        description: description,
         image: image,
         location: location,
         review: [],

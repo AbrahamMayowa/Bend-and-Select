@@ -13,17 +13,52 @@
         <label for="name">name</label>
         <input type="text" name="name" id="name">
 
-        <label for=""
+        <label for="category">category</label>
+        <select>
+            <option value="mobile-phone-tablet" name="category">Mobile Phone & Tablets</option>
+            <option value="bags" name="category">Bags</option>
+            <option value="computer-accessories" name="category">Computer Accessories</option>
+            <option value="audio-music-equipment" name="category">Audio & Music Equipment</option>
+            <option value="vehicle" name="category">Vehicle</option>
+            <option value="home-appliances" name="category">Home Appliances</option>
+            <option value="electrical-equipment" name="category">Electrical Equipment</option>
+            <option value="electronics" name="category">Electronics</option>
+        </select>
+
+        <label for="condition">condition</label>
+        <select>
+            <option value="new" name="condition">New</option>
+            <option value="used" name="condition">Used</option>
+        </select>
 
 
-        
+        <label for="description">description</label>
+        <textarea name="description" rows="10"></textarea>
+
+        <label for="image">image</label>
+        <input type="image" name="image">
+
+        <label for="location">location</label>
+        <select>
+                <option value="lagos" name="location">Lagos</option>
+                <option value="ibadan" name="location">Ibadan</option>
+                <option value="Kano" name="location">Kano</option>
+                <option value="port-harcourt" name="location">Port-Harcourt</option>
+                <option value="abuja" name="location">Abuja</option>
+                <option value="abeokuta" name="location">Abeokuta</option>
+                <option value="calabar" name="location">Calabar</option>
+                <option value="uyo" name="location">Uyo</option>
+                <option value="enugu" name="location">Enugu</option>
+
+        </select>        
         
         </form> 
-       
+    
 
     </div>
 </main>
 
 
 <%- include('../includes/end.ejs') %>
+
 
