@@ -12,3 +12,15 @@ exports.goodsLists = (req, res, next) => {
 }
 
 
+exports.productDetails = (req, res, next)=> {
+    const getId =  req.params.productId
+
+    Goods.findById(getId)
+    .then(goods =>{
+        res.render('general/productDetails', {
+            pageTitle: 'Product',
+            productDetails: goods
+        })
+    })
+
+}

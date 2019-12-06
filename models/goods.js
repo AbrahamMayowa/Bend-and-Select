@@ -19,8 +19,9 @@ const goodsSchema = new Schema({
     },
 
     image: {
-        data: Buffer,
-        contentType: String
+        type: String,
+        required: true
+
     },
 
     location: {
@@ -60,8 +61,17 @@ const goodsSchema = new Schema({
     
 })
 
-goodsSchema.methods.addReview = function(){
-    
+goodsSchema.methods.addReview = function(raterId, rateRank){
+    const updateReview = [...this.review]
+    const rating = {
+        rating: rateRank,
+        rater: raterId
+    }
+
+    updateReview.push(rating)
+    this.review = updateReview
+    return this.save()
+
 }
 
 module.exports = mongoose.model('Goods', goodsSchema)

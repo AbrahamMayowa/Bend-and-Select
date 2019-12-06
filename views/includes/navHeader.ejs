@@ -3,20 +3,34 @@
 
     <nav>
         <ul>
-            <li>Home</li>
+            <li>
+                <a href="/">Home</a>
+            </li>
             <li> Manage Goods</li>
             <% if (!isAuthenticated) { %>
             <li><a href="/signup/buyer">SignUp buyer</a></li>
             <li><a href="/signup/seller">SignUp seller</a></li>
             <li><a href="/login/buyer">Buyer LogIn</a></li>
             <li><a href="/login/seller">Seller LogIn</a></li>
-        </ul>
 
+
+               
             <% } else { %>
+                <li>
                 <form action="/logout" method="POST">
                     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     <button type="submit">Log Out</button> 
                 </form>
+                </li>
+
+                <% if (isAuthenticated && isSeller) { %>
+                    <li>
+                        <a href="/admin/homepage">Admin</a>
+                    </li>
+                    <% } %>
             <% } %>
+
+        </ul>
+
        
     </nav>

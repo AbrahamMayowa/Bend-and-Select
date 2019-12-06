@@ -4,34 +4,35 @@ const Seller = require('../models/seller')
 
 const bcrypt = require('bcryptjs')
 
+const {validationResult} = require('express-validator/check')
 
-exports.getSellerSignUp = (req, res, next) => {
-    let errorMessage = req.flash('signUpError')
+
+const errorMessageAb = reqObj => {
+    let errorMessage = reqObj.flash('signUpError')
 
     if (errorMessage.length > 0){
-        errorMessage = errorMessage[0]
+        return errorMessage = errorMessage[0]
     }else{
-        errorMessage = null
+        return errorMessage = null
     }
-  
-    res.render('auth/sellerSignUp', {
+
+}
+
+
+exports.getSellerSignUp = (req, res, next) => {
+
+        res.render('auth/sellerSignUp', {
         pageTitle: 'Sign Up',
-        errorMessage: errorMessage
-    })
+        errorMessage: errorMessageAb(req)
+})
 }
 
 
 exports.getBuyerSignUp = (req, res, next) => {
-    let errorMessage = req.flash('signUpError')
-
-    if (errorMessage.length > 0){
-        errorMessage = errorMessage[0]
-    }else{
-        errorMessage = null
-    }
+  
     res.render('auth/buyerSignUp', {
         pageTitle: 'Sign Up',
-        errorMessage: errorMessage
+        errorMessage: errorMessageAb(req)
     })
 }
 
@@ -41,13 +42,31 @@ exports.sellerSignUp = (req, res, next) => {
     const name = req.body.name
     const email = req.body.email
     const phoneNumber = req.body.phoneNumber
-    const image = req.body.image
+    const image = req.file
     const password = req.body.password
 
+    if(!image){
+        return res.status(422).render(('auth/sellerSignUp', {
+            pageTitle: 'Sign Up',
+            errorMessage: 'Attached file is not an image'
+        })
+
+        )
+    }
+    
+    const validationErrors = validationResult(req)
+    if(!validationErrors.isEmpty()){
+        return res.status(422).render(('auth/sellerSignUp', {
+            pageTitle: 'Sign Up',
+            errorMessage: validationErrors.array()[0].msg
+        }))
+    }
+
+    imagePath = image.path
     Seller.findOne({email: email})
     .then(user =>{
         if (user){
-            req.flash('signUpError', 'The email is already exist. Pick another one.')
+            req.flash('signUpError', 'The email is already exist.')
             return res.redirect('/signup/seller')
         }
         bcrypt.hash(password, 12)
@@ -56,7 +75,7 @@ exports.sellerSignUp = (req, res, next) => {
                 name: name,
                 email: email,
                 phoneNumber: phoneNumber,
-                image: image,
+                image: imagePath,
                 password: hashedPassword
         
             })

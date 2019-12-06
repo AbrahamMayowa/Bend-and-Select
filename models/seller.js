@@ -19,8 +19,8 @@ const sellerSchema = new Schema({
     },
 
     image: {
-        data: Buffer,
-        contentType: String
+       type: String,
+       required: true
     },
 
     joined: {

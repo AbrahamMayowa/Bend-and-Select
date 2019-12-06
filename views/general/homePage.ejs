@@ -9,7 +9,11 @@
         <% if (allGoods.length > 0) { %>
 
             <% for (let goods of allGoods) { %>
-                <div><%= goods.name %></div>
+                <div>
+                        
+                    <a href="/product-details/<%= goods._id %>"><%= goods.name %></a>
+                        
+                </div>
                 <div><%= goods.category %></div>
                 <div><%= goods.location %></div>
             <% } %>

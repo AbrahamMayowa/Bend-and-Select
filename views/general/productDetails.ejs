@@ -1,0 +1,60 @@
+<%- include('../includes/head.ejs', {pageTitle: pageTitle}) %>
+
+
+<%- include('../includes/navHeader.ejs') %>
+
+<main>
+    <%= productDetails.name %>
+    
+    <div>
+        <%= productDetails.description %>
+    </div>
+    <% if(isAuthenticated && !isSeller) { %>
+    <div>
+        <form action="/review" method="POST">
+            <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>">
+            <input type="hidden" name="productId" value="<%= productDetails._id %>">
+            <select name="review">
+                <option value="1">poor</option>
+                <option value="2">good</option>
+                <option value="3">very good</option>
+                <option value="4">exellent</option>
+            </select>
+            <button type="submit">submit</button>
+
+        </form>
+    </div>
+
+    <% } else { %>
+
+        <p>log in to review</p>
+
+    <% } %>
+
+
+    <% if(isAuthenticated && isSeller) { %>
+    <div>
+        <a href="/admin/product-edit/<%= productDetails._id %>">Edit</a>
+    </div>
+
+    <div>
+        <form method="POST" action="/admin/product-delete">
+            <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>">
+            <input type="hidden" name="productId" value="<%= productDetails._id %>">
+            <button type="submit">delete</button>
+        </form>
+    </div>
+
+    <% } %>
+
+</main>
+
+
+
+
+
+
+
+
+
+<%- include('../includes/end.ejs') %>

@@ -1,0 +1,60 @@
+<%- include('../includes/head.ejs', {pageTitle: pageTitle}) %>
+
+
+<%- include('../includes/navHeader.ejs') %>
+
+
+<form action="/admin/product-edit" method="POST">
+<input type="hidden" name="_csrf" value="<%= csrfToken %>">
+<input type="hidden" name="productId" value="<%= goods._id %>">
+
+<label for="name">name</label>
+<input type="text" name="name" id="name" value="<%= goods.name %>">
+
+<label for="category">category</label>
+<select name="category" >
+    <option value="mobile-phone-tablet" >Mobile Phone & Tablets</option>
+    <option value="bags" >Bags</option>
+    <option value="computer-accessories" >Computer Accessories</option>
+    <option value="audio-music-equipment" >Audio & Music Equipment</option>
+    <option value="vehicle" >Vehicle</option>
+    <option value="home-appliances" >Home Appliances</option>
+    <option value="electrical-equipment" >Electrical Equipment</option>
+    <option value="electronics" >Electronics</option>
+</select>
+
+<label for="condition">condition</label>
+<select name="condition">
+    <option value="new" >New</option>
+    <option value="used" >Used</option>
+</select>
+
+
+<label for="description">description</label>
+<textarea name="description" rows="11"><%= goods.description %></textarea>
+
+<label for="image">image</label>
+<input type="image" name="image" value="<%= goods.image %>">
+
+<label for="location">location</label>
+<select name="location">
+        <option value="lagos" >Lagos</option>
+        <option value="ibadan" >Ibadan</option>
+        <option value="Kano" >Kano</option>
+        <option value="port-harcourt" >Port-Harcourt</option>
+        <option value="abuja" >Abuja</option>
+        <option value="abeokuta" >Abeokuta</option>
+        <option value="calabar" >Calabar</option>
+        <option value="uyo" >Uyo</option>
+        <option value="enugu" >Enugu</option>
+
+</select>
+<button type="submit">Submit</button>        
+
+</form>
+
+
+
+
+<%- include('../includes/end.ejs') %>
+

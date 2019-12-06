@@ -19,13 +19,30 @@ const buyerSchema = new Schema({
     },
 
     image: {
-        data: Buffer,
-        contentType: String
+        type: String,
     },
     password: {
         type: String,
         required: true
+    },
+    wishList: {
+        items: [
+        {
+            goodsId: {
+                type: Schema.Types.ObjectId,
+                ref: 'Goods'
+            }
+        }
+        ]
     }
+
 })
+
+buyerSchema.methods.addWishList =  function(productId){
+    const updateWishList =  [...this.wishList.items]
+    updateWishList.push(productId)
+    this.wishList.items = updateWishList
+    return this.save()
+}
 
 module.exports = mongoose.model('Buyer', buyerSchema)

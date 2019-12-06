@@ -3,6 +3,16 @@
 
 <%- include('../includes/navHeader.ejs') %>
 
+<nav>
+    <ul>
+        <li>
+            <a href="/admin/add-product">Add Product</a>
+        </li>
+    </ul>
+</nav>
+
+
+
 <main>
    <p>
        Manage your goods here!
@@ -11,9 +21,23 @@
         <% if (allGoods.length > 0) { %>
 
             <% for (let goods of allGoods) { %>
-                <div><%= goods.name %></div>
+                <div>
+                    <a href="/admin/product-details/<%= goods._id %>"><%= goods.name %></a>
+                </div>
                 <div><%= goods.category %></div>
                 <div><%= goods.location %></div>
+
+                <div>
+                        <a href="/admin/product-edit/<%= goods._id %> ">Edit</a>
+                    </div>
+                
+                    <div>
+                        <form method="POST" action="/admin/product-delete">
+                            <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>">
+                            <input type="hidden" name="productId" value="<%= goods._id %>">
+                            <button type="submit">delete</button>
+                        </form>
+                    </div>
             <% } %>
 
         <% } else { %>
