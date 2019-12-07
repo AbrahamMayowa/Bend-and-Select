@@ -18,6 +18,7 @@ const generalRoute = require('./routes/generalRoute')
 const auth = require('./routes/auth')
 const sellerAdmin = require('./routes/sellerAdmin')
 const buyerRoute = require('./routes/buyerAction')
+const error = require('./controllers/error')
 
 
 const app = express()
@@ -92,12 +93,17 @@ app.use((req, res, next) =>{
             .then(user =>{
                 req.user = user
                 return next()
+            }).catch(error =>{
+                next(error)
             })
         }else{
         Buyer.findById(req.session.user._id)
         .then(user =>{
             req.user = user
             return next()
+        })
+        .catch(error =>{
+          next(error)
         })
         
 
@@ -120,6 +126,14 @@ app.use(generalRoute)
 app.use(auth)
 app.use('/admin', sellerAdmin)
 app.use(buyerRoute)
+
+app.use(error.error404)
+
+//ap//p.use((error, req, res, next) => {
+    //res.status(500).render('error/500',{
+      //  pageTitle: 'Error 500'
+    //})
+//})//
 
 mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true})
 .then(response => app.listen(3000, () => console.log('working')))

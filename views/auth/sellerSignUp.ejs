@@ -1,4 +1,4 @@
-i<%- include('../includes/head.ejs', {pageTitle: pageTitle}) %>
+<%- include('../includes/head.ejs', {pageTitle: pageTitle}) %>
 
 <%- include('../includes/navHeader.ejs', {isAuthenticated: isAuthenticated}) %>
 
@@ -9,7 +9,7 @@ i<%- include('../includes/head.ejs', {pageTitle: pageTitle}) %>
             </div>
 
     <div class="form-wrapper">
-        <form method="POST" action="/signup/seller">
+        <form method="POST" action="/signup/seller" enctype="multipart/form-data">
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
 
             <label for="name">name</label>
@@ -18,14 +18,17 @@ i<%- include('../includes/head.ejs', {pageTitle: pageTitle}) %>
             <label for="email">Email</label>
             <input type="email" name="email" id="email">
 
-            <label for="password">Password</label>
+            <label for="password">Password</label> 
             <input type="password" name="password" id="password">
+            
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" name="password2" id="password2">
 
             <label for="phone number">Phone number</label>
             <input type="number" name="phoneNumber" id="phoneNumber">
 
             <label for="image">Image</label>
-            <input type="image" name="image" id="image">
+            <input type="file" name="image" id="image">
             <button type="submit">SignUp</button>
 
         </form>
