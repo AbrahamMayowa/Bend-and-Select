@@ -3,3 +3,10 @@ exports.error404 = (req, res, next) =>{
         pageTitle: 'Error 404'
     })
 }
+
+
+exports.error401 = (req, res, next) =>{
+    res.status(401).render('error/401',{
+        pageTitle: 'Error 401'
+    })
+}

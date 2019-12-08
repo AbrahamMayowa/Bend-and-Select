@@ -4,14 +4,18 @@
 <%- include('../includes/navHeader.ejs') %>
 
 <main>
+
+    <%= errorMessage %>
+
+
    
     <div class="form-control">
 
-        <form action="/admin/add-product" method="POST">
+        <form action="/admin/add-product" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
 
         <label for="name">name</label>
-        <input type="text" name="name" id="name">
+        <input type="text" name="name" id="name" value="<%= name %>">
 
         <label for="category">category</label>
         <select name="category">
@@ -33,10 +37,10 @@
 
 
         <label for="description">description</label>
-        <textarea name="description" rows="11"></textarea>
+        <textarea name="description" rows="11"><%= description %></textarea>
 
         <label for="image">image</label>
-        <input type="image" name="image">
+        <input type="file" name="image">
 
         <label for="location">location</label>
         <select name="location">

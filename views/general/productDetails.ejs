@@ -31,8 +31,10 @@
 
     <% } %>
 
+    <% if () { %>
 
-    <% if(isAuthenticated && isSeller) { %>
+
+    <% if(goods.goodsSeller.toString() === req.user._id.toString()) { %>
     <div>
         <a href="/admin/product-edit/<%= productDetails._id %>">Edit</a>
     </div>

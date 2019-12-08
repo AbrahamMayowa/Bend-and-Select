@@ -1,5 +1,8 @@
 const mongoose = require('mongoose')
 
+
+const imageDeleteHelper = require('../utils/deleteImage')
+
 const Schema = mongoose.Schema
 
 const goodsSchema = new Schema({
@@ -73,5 +76,6 @@ goodsSchema.methods.addReview = function(raterId, rateRank){
     return this.save()
 
 }
+
 
 module.exports = mongoose.model('Goods', goodsSchema)

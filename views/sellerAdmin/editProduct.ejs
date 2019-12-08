@@ -4,7 +4,7 @@
 <%- include('../includes/navHeader.ejs') %>
 
 
-<form action="/admin/product-edit" method="POST">
+<form action="/admin/product-edit" method="POST" enctype="multipart/form-data">
 <input type="hidden" name="_csrf" value="<%= csrfToken %>">
 <input type="hidden" name="productId" value="<%= goods._id %>">
 
@@ -34,7 +34,7 @@
 <textarea name="description" rows="11"><%= goods.description %></textarea>
 
 <label for="image">image</label>
-<input type="image" name="image" value="<%= goods.image %>">
+<input type="file" name="image">
 
 <label for="location">location</label>
 <select name="location">

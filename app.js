@@ -19,6 +19,7 @@ const auth = require('./routes/auth')
 const sellerAdmin = require('./routes/sellerAdmin')
 const buyerRoute = require('./routes/buyerAction')
 const error = require('./controllers/error')
+const statusError = require('./routes/error')
 
 
 const app = express()
@@ -126,6 +127,7 @@ app.use(generalRoute)
 app.use(auth)
 app.use('/admin', sellerAdmin)
 app.use(buyerRoute)
+app.use(statusError)
 
 app.use(error.error404)
 

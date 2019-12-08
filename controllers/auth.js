@@ -144,7 +144,8 @@ exports.sellerSignUp = (req, res, next) => {
 exports.getBuyerLogin = (req, res, next) => {
     res.render('auth/buyerLogin',{
         pageTitle: 'Login',
-        errorMessage: ''
+        errorMessage: '',
+        provideEmail: ''
 
     })
 }
@@ -153,10 +154,38 @@ exports.postBuyerLogin = (req, res, next) =>{
     const email = req.body.email
     const password = req.body.password
 
+
+    const error = validationResult(req)
+
+    if(!error.isEmpty()){
+        return res.render('auth/buyerLogin',{
+            pageTitle: 'Login',
+            errorMessage: error.array()[0].msg,
+            provideEmail: email
+    
+        })
+    }
+
     Buyer.findOne({email: email})
     .then(user => {
+        if(!user){
+            return res.render('auth/buyerLogin',{
+                pageTitle: 'Login',
+                errorMessage: 'Email or password is not valid',
+                provideEmail: email
+        
+            })
+        }
         bcrypt.compare(password, user.password)
         .then(match => {
+            if(!match){
+                return res.render('auth/buyerLogin',{
+                    pageTitle: 'Login',
+                    errorMessage: "Email or Password is not valid",
+                    provideEmail: email
+            
+                })
+            }
             req.session.isAuthenticated = true
             req.session.user = user
             req.session.isSeller = false
@@ -182,7 +211,9 @@ exports.getSellerLogin = (req, res, next) => {
    
      res.render('auth/sellerLogin',{
         pageTitle: 'Login',
-        errorMessage: ''
+        errorMessage: '',
+        provideEmail: '',
+        provideEmail: ''
     })
 }
 
@@ -190,22 +221,51 @@ exports.postSellerLogin = (req, res, next) => {
     const email = req.body.email
     const password = req.body.password
 
+    const error = validationResult(req)
+
+    if(!error.isEmpty()){
+        return res.render('auth/sellerLogin',{
+            pageTitle: 'Login',
+            errorMessage: error.array()[0].msg,
+            provideEmail: email
+        })
+
+    }
+
     Seller.findOne({email: email})
     .then(user => {
         if(!user){
-            return res.redirect('/login/seller')   
+            return res.render('auth/sellerLogin',{
+            pageTitle: 'Login',
+            errorMessage: 'Email or Password is not valid',
+            provideEmail: email
+        })
         }
+
         bcrypt.compare(password, user.password)
         .then(match => {
             if(!match){
-                return res.redirect('/login/seller')
-            }
+             return res.render('auth/sellerLogin',{
+                pageTitle: 'Login',
+                errorMessage: "Email or password is not valid",
+                provideEmail: email
+            })
+        }
             req.session.isAuthenticated = true
             req.session.user = user
             req.session.isSeller = true
             return res.redirect('/')
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+            const err = new Error(error)
+            err.httpStatusCode = 500
+            return next(err)
+        })
+    })
+    .catch(error =>{
+        const err = new Error(error)
+            err.httpStatusCode = 500
+            return next(err)
     })
 }
 
@@ -217,6 +277,6 @@ exports.logOut = (req, res, next)=>{
             err.httpStatusCode = 500
             return next(err)
         }
-        res.redirect('/')
+        return res.redirect('/')
     })
 }

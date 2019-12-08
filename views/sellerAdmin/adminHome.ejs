@@ -14,6 +14,7 @@
 
 
 <main>
+        <div class="successInfo"><%= successInfo %></div>
    <p>
        Manage your goods here!
    </p>
@@ -27,17 +28,22 @@
                 <div><%= goods.category %></div>
                 <div><%= goods.location %></div>
 
-                <div>
-                        <a href="/admin/product-edit/<%= goods._id %> ">Edit</a>
-                    </div>
-                
-                    <div>
-                        <form method="POST" action="/admin/product-delete">
-                            <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>">
-                            <input type="hidden" name="productId" value="<%= goods._id %>">
-                            <button type="submit">delete</button>
-                        </form>
-                    </div>
+
+                    <% if (goods.goodsSeller.toString() === req.user._id.toString()) { %>
+                        <div>
+                                <a href="/admin/product-edit/<%= goods._id %> ">Edit</a>
+                            </div>
+                        
+                            <div>
+                                <form method="POST" action="/admin/product-delete">
+                                    <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>">
+                                    <input type="hidden" name="productId" value="<%= goods._id %>">
+                                    <button type="submit">delete</button>
+                                </form>
+                            </div>
+                    <% } %>
+
+
             <% } %>
 
         <% } else { %>

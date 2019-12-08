@@ -1,8 +1,5 @@
 exports.onlyAuthentcatedUser = (req, res, next) =>{
     if(!req.session.isAuthenticated){
-        req.flash('LogInPlease', 'Please login to access the requested page')
-        return res.redirect('/')
-    }else{
-        next()
+        return res.status(401).redirect('/401')
     }
 }

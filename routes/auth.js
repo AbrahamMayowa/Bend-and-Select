@@ -1,5 +1,6 @@
 const auth = require('../controllers/auth')
 const express = require('express')
+const bcrypt = require('bcryptjs')
 
 const router = express.Router()
 
@@ -100,11 +101,15 @@ router.post('/signup/buyer', [
 
 router.get('/login/buyer', auth.getBuyerLogin)
 
-router.post('/login/buyer', auth.postBuyerLogin)
+router.post('/login/buyer',[
+    body('email', 'Procide a valid email' ).trim().isEmail(),
+], auth.postBuyerLogin)
 
 router.get('/login/seller', auth.getSellerLogin)
 
-router.post('/login/seller', auth.postSellerLogin)
+router.post('/login/seller', [
+    body('email', 'Provide a valid email').trim().isEmail(),
+], auth.postSellerLogin)
 
 router.post('/logout', onlyAuth.onlyAuthentcatedUser, auth.logOut)
 
