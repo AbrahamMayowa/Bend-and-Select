@@ -28,6 +28,14 @@ const sellerSchema = new Schema({
         default: Date.now
     },
     
+    token: {
+        type: String
+    },
+
+    tokenDate: {
+        type: Date
+    },
+    
     password: {
         type: String,
         required: true

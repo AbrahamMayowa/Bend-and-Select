@@ -101,17 +101,52 @@ router.post('/signup/buyer', [
 
 router.get('/login/buyer', auth.getBuyerLogin)
 
+
+
 router.post('/login/buyer',[
     body('email', 'Procide a valid email' ).trim().isEmail(),
 ], auth.postBuyerLogin)
 
+
+
+
 router.get('/login/seller', auth.getSellerLogin)
+
+
 
 router.post('/login/seller', [
     body('email', 'Provide a valid email').trim().isEmail(),
 ], auth.postSellerLogin)
 
+
+
+
 router.post('/logout', onlyAuth.onlyAuthentcatedUser, auth.logOut)
+
+
+router.get('/reset-password/:userStatus', auth.getResetPassword)
+
+
+router.post('/reset-confirm',auth.postGetResetPassword)
+
+
+router.get('/reset/:token/:userStatus', auth.getNewPassword)
+
+router.post('/new-password',  [
+    body('password').custom((value, {req}) =>{
+        if(value ==! req.body.password2){
+            throw new Error('Password and confirm password do not match')
+        }
+        return true
+    })
+], auth.postNewPassword)
+
+
+router.get('/password-reset-fail', auth.passwordFail)
+
+router.get('/passoword-reset-success', auth.passwordSuccess),
+
+router.get('/password-reset-response', auth.passwordResetResponse)
 
 
 module.exports = router

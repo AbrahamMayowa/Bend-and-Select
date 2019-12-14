@@ -5,7 +5,7 @@ const {validationResult} = require('express-validator')
 
 exports.adminHome = (req, res, next) => {
     const successInfo = req.flash('productAddSuccess')
-    Goods.find()
+    Goods.find({goodsSeller: req.user._id})
     .then(goods => {
         res.render('sellerAdmin/adminHome', {
             allGoods: goods,
@@ -81,7 +81,16 @@ exports.postAddProduct = (req, res, next)=>{
         description: description,
         image: imagePath,
         location: location,
-        review: [],
+        review: {
+            buyerReview: [],
+            reviewRanking: {
+                five: 0,
+                four: 0,
+                three: 0,
+                two: 0,
+                one: 0
+            }
+        },
         goodsSeller: req.user._id
     })
 
@@ -104,9 +113,14 @@ exports.productDetails = (req, res, next)=> {
     const getId =  req.params.productId
     const editInfo = req.flash('editSuccess')
 
+
     Goods.findById(getId)
     .then(goods => {
-        res.render('sellerAdmin/productDetails', {
+
+        if(goods.goodsSeller.toString() !== req.session.user._id.toString()){
+            return res.status(401).redirect('/401')
+        }
+        return res.render('sellerAdmin/productDetails', {
             pageTitle: 'Product',
             productDetails: goods,
             editInfo: editInfo.length > 0 ? editInfo[0] : null

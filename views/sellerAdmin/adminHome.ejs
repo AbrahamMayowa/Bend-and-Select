@@ -29,7 +29,6 @@
                 <div><%= goods.location %></div>
 
 
-                    <% if (goods.goodsSeller.toString() === req.user._id.toString()) { %>
                         <div>
                                 <a href="/admin/product-edit/<%= goods._id %> ">Edit</a>
                             </div>
@@ -43,8 +42,6 @@
                             </div>
                     <% } %>
 
-
-            <% } %>
 
         <% } else { %>
             <div>

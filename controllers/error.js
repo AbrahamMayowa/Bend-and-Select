@@ -10,3 +10,10 @@ exports.error401 = (req, res, next) =>{
         pageTitle: 'Error 401'
     })
 }
+
+
+exports.error500 = (req, res, next) =>{
+    res.status(500).render('error/500',{
+        pageTitle: 'Error 500'
+    })
+}

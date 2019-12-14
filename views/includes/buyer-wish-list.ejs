@@ -1,0 +1,13 @@
+<div>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <input type="hidden" name="productId" value="<%= productId %>">
+    <button class="btn" type="button" onclick="wishlist(this)" wishlist='<%= wishlist %>'>
+            <% if(wishlist) {%>
+                Remove Wishlist
+                <% } else {%>
+                    Add wishlist
+                    <% } %>
+    </button>
+    
+
+</div>

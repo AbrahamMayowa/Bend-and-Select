@@ -42,18 +42,35 @@ const goodsSchema = new Schema({
         dafault: Date.now
     },
 
-    review:[
-        {
-            rating: {
-                type: Number
-            },
-            rater: {
+    review:{
+        buyerReview: [
+            {reviewer: {
                 type: Schema.Types.ObjectId,
                 ref: 'Buyer',
-                required: true
+                }
             }
+        ],
+        reviewRanking: {
+            five: {
+                type: Number
+            },
+            four: {
+                type: Number
+            },
+            three: {
+                type: Number
+            },
+            two: {
+                type: Number
+            },
+            one: {
+                type: Number
+            }
+
         }
-    ],
+
+    },
+        
 
     goodsSeller: {
         type: Schema.Types.ObjectId,
@@ -65,16 +82,26 @@ const goodsSchema = new Schema({
 })
 
 goodsSchema.methods.addReview = function(raterId, rateRank){
-    const updateReview = [...this.review]
-    const rating = {
-        rating: rateRank,
-        rater: raterId
-    }
+    
+    const updateReview = {...this.review.reviewRanking}
+    const updateBuyerReview = [...this.review.buyerReview]
+    updateBuyerReview.push({reviewer: raterId})
+    this.review.buyerReview = updateBuyerReview
 
-    updateReview.push(rating)
-    this.review = updateReview
+    const upadateRank = updateReview[rateRank] + 1
+    updateReview[rateRank] = upadateRank
+    this.review.reviewRanking = updateReview
     return this.save()
 
+}
+
+goodsSchema.methods.checkReview = function(userId){
+    const userIndex = this.review.buyerReview.findIndex(buyer => buyer.reviewer.toString() === userId.toString())
+    if (userIndex > -1){
+        return true
+    }else{
+    return false
+    }
 }
 
 
