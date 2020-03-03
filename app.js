@@ -10,9 +10,6 @@ const multer = require('multer')
 
 
 
-
-
-
 const Seller = require('./models/seller')
 const Buyer = require('./models/buyer')
 const generalRoute = require('./routes/generalRoute')
@@ -21,6 +18,7 @@ const sellerAdmin = require('./routes/sellerAdmin')
 const buyerRoute = require('./routes/buyerAction')
 const error = require('./controllers/error')
 const statusError = require('./routes/error')
+const searchFilter = require('./routes/search')
 
 
 const app = express()
@@ -77,6 +75,7 @@ app.use(
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'images')))
 
 // file configuraitons
 app.use(
@@ -129,16 +128,18 @@ app.use(generalRoute)
 app.use(auth)
 app.use('/admin', sellerAdmin)
 app.use(buyerRoute)
+app.use(searchFilter)
 app.use(statusError)
 
 app.use(error.error404)
 
-//ap//p.use((error, req, res, next) => {
-    //res.status(500).render('error/500',{
-      //  pageTitle: 'Error 500'
-    //})
-//})//
+app.use((error, req, res, next) => {
+  console.log(error)
+    res.status(500).render('error/500',{
+        pageTitle: 'Error 500'
+    })
+})
 
 mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true})
-.then(response => app.listen(3000, () => console.log('working')))
+.then(response => app.listen(5000, () => console.log('working')))
 .catch(error => console.log(error))

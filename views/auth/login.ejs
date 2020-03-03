@@ -4,6 +4,30 @@
 
 
 <main>
+    Login  as buyer
+    <div class="user-login-form">
+    <div class="buyer-login">
+    </div>
+        <%= errorMessage %>
+    </div>
+        <form method="POST" action="/login/buyer">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+            <label for="email">email</label>
+            <input type="email" name="email" id="email" value="<%= provideEmail %>">
+
+            <label for="password">password</label>
+            <input type="password" name="password" id="password">
+            <button type="submit">Login In</button>
+
+        </form>
+        <div>forget password? <a href="/reset-password/buyer">Reset password</a> </div>
+    </div>
+
+  
+
+    login as a seller
+    <div class="seller-login"></div>
 
     <%= errorMessage %>
     <div>
@@ -21,6 +45,11 @@
         </form>
     </div>
     <div>forget password? <a href="/reset-password/seller">Reset password</a> </div>
+
+</div>
+
+</div>
+   
 </main>
 
 <%- include('../includes/end.ejs') %>

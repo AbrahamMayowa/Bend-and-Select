@@ -29,6 +29,13 @@ exports.getSellerSignUp = (req, res, next) => {
 })
 }
 
+exports.generalSignUpPage = (req, res, next)=>{
+    res.render('auth/generalSignUp', {
+        pageTitle: 'Sign Up',
+        errorMessage: ''
+    })
+}
+
 
 exports.getBuyerSignUp = (req, res, next) => {
     res.render('auth/buyerSignUp', {
@@ -57,7 +64,7 @@ exports.buyerSignUp = (req, res, next) => {
 
     let imagePath;
     if (image){
-        imagePath = image.path
+        imagePath = image.filename
     } 
     bcrypt.hash(password, 12)
     .then(hashedPassword =>{
@@ -93,6 +100,7 @@ exports.buyerSignUp = (req, res, next) => {
 }
 
 
+
 exports.sellerSignUp = (req, res, next) => {
     const name = req.body.name
     const email = req.body.email
@@ -119,7 +127,7 @@ exports.sellerSignUp = (req, res, next) => {
         })
     }
 
-    const imagePath = image.path;
+    const imagePath = image.filename;
     
     bcrypt.hash(password, 12)
         .then(hashedPassword =>{
@@ -158,8 +166,8 @@ exports.sellerSignUp = (req, res, next) => {
 
 
 
-exports.getBuyerLogin = (req, res, next) => {
-    res.render('auth/buyerLogin',{
+exports.getLogin = (req, res, next) => {
+    res.render('auth/login',{
         pageTitle: 'Login',
         errorMessage: '',
         provideEmail: ''
@@ -224,17 +232,6 @@ exports.postBuyerLogin = (req, res, next) =>{
     })
 }
 
-
-
-exports.getSellerLogin = (req, res, next) => {
-   
-     res.render('auth/sellerLogin',{
-        pageTitle: 'Login',
-        errorMessage: '',
-        provideEmail: '',
-        provideEmail: ''
-    })
-}
 
 exports.postSellerLogin = (req, res, next) => {
     const email = req.body.email

@@ -1,0 +1,208 @@
+.advert-text-search{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 300px;
+    width: 100%;
+    color:black;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.primary-advert{
+    text-align: center;
+    font-weight: 800;
+    font-size: 25px;
+    margin-bottom: 6px;
+    margin-top: 25px;
+}
+
+.secondary-advert{
+    text-align: center;
+    font-weight: 400;
+    font-size: 12px;
+    margin-bottom: 12px;
+    color: #483D8B
+}
+
+.homepage-search-input, .form-flex{
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    
+}
+
+.homepage-search-input input{
+    height: 50px;
+    width: 90%;
+    border: 2px solid #483D8B;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    padding: 12px 20px;
+   
+}
+
+.homepage-search-input ::placeholder{
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.homepage-search{
+    height: 78px;
+    width: 50px;
+    background-color: #483D8B;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2px solid #483D8B;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color: white;
+}
+
+.button-style{
+    color: white; 
+    background:none; 
+    border:none;
+}
+
+/*
+
+PRODUCT LIST SECTION
+
+*/
+
+.item-list{
+    color: #000;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin-top: 12px;
+    width: 100%;
+}
+
+.filter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.filter-item{
+    color: #483D8B;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 12%;
+    height: 50px;
+    font-size: 20px;
+    margin-bottom: 7px;
+}
+
+.category-text{
+    width: 100%;
+    text-align: center;
+    font-weight: 800;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    padding-top: 12px;
+}
+
+.item-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.card-wrapper{
+    height: 320px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    background-color: white;
+    margin-bottom: 18px;
+    overflow: hidden;
+}
+
+
+.goods-image{
+    height: 170px;
+    width: 100%;
+}
+
+.goods-image img{
+    height: 100%;
+    width: 100%;
+}
+
+.name-wrapper{
+    height: 90px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 12px;
+    margin-bottom: 10px;
+    text-overflow: clip;
+
+}
+
+.condition-price, .review-location{
+    margin-top: 12px;
+    height: 35px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 800;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.product-price{
+    color: green;
+    margin-right: 7px; 
+}
+
+.product-condition{
+    margin-left: 7px;
+}
+
+.checked-review{
+    color: orange;
+}
+
+.review{
+    margin-left: 7px;
+}
+
+.location{
+    margin-right: 7px;
+}
+
+.location-icon{
+    color: #483D8B;
+}
+
+/*
+
+FOR 700 AND ABOVE SCREEN
+
+*/
+
+@media screen and (min-width: 700px) {
+    .homepage-search-input input[type='text']{
+        width: 500px;
+    }
+
+    .filter-item{
+        height: 100px;
+        width: 8%;
+    }
+
+    .category-text{
+        font-size: 22px;
+        margin-bottom: 0px;
+    }
+    
+
+}

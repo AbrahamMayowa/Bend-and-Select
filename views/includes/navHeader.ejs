@@ -1,36 +1,57 @@
 <body>
 
+    <nav class="main-nav">
+        <section class="nav-wrapper">
+        <a href="/">
+            <div class="logo">
+                <i class="fas fa-shopping-cart"></i>
+                B&S
+            </div>
+        </a>
 
-    <nav>
+
+        <div class="admin-search">
+
         <ul>
             <li>
-                <a href="/">Home</a>
+                <a href="/admin/homepage">Admin</a>
             </li>
-            <li> Manage Goods</li>
+
+            <li class="nav-form">
+                <form method="GET" action="#">
+                    <input type="text" name="search" id="search" placeholder="search a product">
+                </form>
+                
+            </li>
+            <li><i class="fas fa-search fa-lg search-icon"></i></li>
+
+        </ul>
+
+        </div>
+
+        <div class="nav-auth">
+        <ul class="sign-up-in">
+
             <% if (!isAuthenticated) { %>
-            <li><a href="/signup/buyer">SignUp buyer</a></li>
-            <li><a href="/signup/seller">SignUp seller</a></li>
-            <li><a href="/login/buyer">Buyer LogIn</a></li>
-            <li><a href="/login/seller">Seller LogIn</a></li>
-
-
-               
+            <li><a href="/signup">Signup</a></li>
+            <li><a href="/login">Login</a></li>
+    
             <% } else { %>
                 <li>
                 <form action="/logout" method="POST">
                     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                    <button type="submit">Log Out</button> 
+                    <button type="submit">Logout</button> 
                 </form>
                 </li>
-
-                <% if (isAuthenticated && isSeller) { %>
-                    <li>
-                        <a href="/admin/homepage">Admin</a>
-                    </li>
-                    <% } %>
             <% } %>
-
         </ul>
+        </div>
+        </section>
+        <div class="mobile-search-form">
+            <form method="GET" action="#" class="mobile-form">
+                <input type="text" name="search" id="search" placeholder="Search a product">
+                <div class='close-icon'><i class="far fa-window-close"></i></div>
+            </form>
+        </div>
 
-       
     </nav>

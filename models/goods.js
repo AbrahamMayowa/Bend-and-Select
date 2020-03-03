@@ -5,6 +5,7 @@ const imageDeleteHelper = require('../utils/deleteImage')
 
 const Schema = mongoose.Schema
 
+
 const goodsSchema = new Schema({
     name: {
         type: String,
@@ -34,6 +35,11 @@ const goodsSchema = new Schema({
 
     description: {
         type: String,
+        required: true
+    },
+
+    price: {
+        type: Number,
         required: true
     },
 
@@ -67,33 +73,56 @@ const goodsSchema = new Schema({
                 type: Number
             }
 
-        }
+        },
 
+        reviewAverage: {
+            sum: {
+                type: Number,
+                default: 0,
+            },
+
+            lengthCount: {
+                type: Number,
+                default: 0
+            },
+            averageScore: {
+                type: Number,
+                default: 0
+            }
+            
+        }
     },
-        
 
     goodsSeller: {
         type: Schema.Types.ObjectId,
         ref: 'Seller',
         required: true
-    }
-
-    
+    }    
 })
 
 goodsSchema.methods.addReview = function(raterId, rateRank){
-    
+    const updateAverage = {...this.review.reviewAverage}
+    const parseRateRank = parseInt(rateRank)
+    const newSum = updateAverage.sum + parseRateRank
+    const newLength = updateAverage.lengthCount + 1
+    const average = Math.trunc(newSum/newLength)
+    updateAverage.sum = newSum
+    updateAverage.lengthCount = newLength
+    updateAverage.averageScore = average
+    this.review.reviewAverage = updateAverage
+
     const updateReview = {...this.review.reviewRanking}
     const updateBuyerReview = [...this.review.buyerReview]
     updateBuyerReview.push({reviewer: raterId})
     this.review.buyerReview = updateBuyerReview
 
-    const upadateRank = updateReview[rateRank] + 1
-    updateReview[rateRank] = upadateRank
+    const updateRank = updateReview[rateRank] + 1
+    updateReview[rateRank] = updateRank
     this.review.reviewRanking = updateReview
     return this.save()
 
 }
+
 
 goodsSchema.methods.checkReview = function(userId){
     const userIndex = this.review.buyerReview.findIndex(buyer => buyer.reviewer.toString() === userId.toString())

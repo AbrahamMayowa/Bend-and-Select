@@ -54,6 +54,8 @@ const onlyAuth = require('../customMiddleware/isAuth')
 
 router.get('/signup/seller',auth.getSellerSignUp)
 
+router.get('/signup', auth.generalSignUpPage)
+
 router.post('/signup/seller', [
     [
         body('name', 'Name is required and should be at least 3 characters').isString().isLength({min: 3}).trim(),
@@ -99,7 +101,7 @@ router.post('/signup/buyer', [
     ]
 ], auth.buyerSignUp)
 
-router.get('/login/buyer', auth.getBuyerLogin)
+router.get('/login', auth.getLogin)
 
 
 
@@ -107,10 +109,6 @@ router.post('/login/buyer',[
     body('email', 'Procide a valid email' ).trim().isEmail(),
 ], auth.postBuyerLogin)
 
-
-
-
-router.get('/login/seller', auth.getSellerLogin)
 
 
 

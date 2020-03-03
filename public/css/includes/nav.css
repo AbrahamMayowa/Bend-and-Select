@@ -1,0 +1,198 @@
+/*
+Element reset 
+*/
+
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+	background-color: #f7f7f7;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/*
+css reset end here
+
+*/
+
+
+.main-nav{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+
+}
+
+.mobile-search-form{
+	display: none;
+}
+
+.mobile-search-form input[type=text]{
+	height: 20px;
+	width: 90%;
+	padding: 12px 20px;
+}
+
+.mobile-search-form ::placeholder{
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+/*
+add this class with javascripts
+*/
+.mobile-form_display{
+	background-color: #483D8B;
+	width: 100%;
+	height: 70px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: width 2s linear 5s;
+		
+	
+}
+
+.nav-wrapper{
+	width: 100%;
+    background-color: #483D8B;
+    display: flex;
+    justify-content: space-between;
+	align-items: center;
+	height: 50px;
+	color: white;
+	-webkit-box-shadow: 0px 3px 0px 0px rgb(97, 97, 105);
+	-moz-box-shadow: 0px 3px 0px 0px rgb(100, 100, 107);
+	box-shadow: 0px 3px 0px 0px rgb(103, 103, 109);
+
+
+}
+
+
+
+
+.admin-search ul, .nav-auth ul{
+    display: flex;
+    justify-content: space-between;
+	align-items: center;
+
+}
+
+.nav-form{
+    display: none;
+}
+
+.logo{
+	font-size: 22px;
+	font-weight: 800;
+	font-family: Arial, Helvetica, sans-serif;
+	margin-left: 8px;
+	cursor: pointer;
+}
+
+.admin-search ul li, .nav-auth ul li{
+	margin-right: 14px;
+	text-decoration: none;
+	font-weight: 700;
+	font-family: Arial, Helvetica, sans-serif;
+	color: white;
+}
+
+.nav-wrapper a, .admin-search ul li a, .search-icon, .nav-auth ul li a{
+	text-decoration: none;
+	color: white;
+	cursor: pointer;
+}
+
+
+.mobile-form{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.close-icon{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 25px;
+	color: white;
+	height: 38px;
+	margin-left: 12px;
+	cursor: pointer;
+}
+
+
+/*
+
+FOR 700 AND ABOVE SCREEN
+
+*/
+
+@media screen and (min-width: 700px) {
+	.nav-form{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.admin-search ul li{
+		margin-right: 30px;
+	}
+
+	.nav-form input[type=text]{
+		width: 300px;
+		padding: 10px 10px;
+		font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+	}
+
+	.admin-search .search-icon{
+		display: none;
+	}
+	
+  }

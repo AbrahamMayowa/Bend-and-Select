@@ -41,6 +41,7 @@ exports.postAddProduct = (req, res, next)=>{
     const name = req.body.name
     const category = req.body.category
     const condition = req.body.condition
+    const price = req.body.price
     const image = req.file
     const location = req.body.location
     const description = req.body.description
@@ -51,6 +52,7 @@ exports.postAddProduct = (req, res, next)=>{
             pageTitle: 'Add Product',
             name: name,
             description: description,
+            price: price,
             errorMessage: 'Provide a valid image format',
             
         })
@@ -71,13 +73,14 @@ exports.postAddProduct = (req, res, next)=>{
 
     let imagePath
     if(image){
-        imagePath = image.path
+        imagePath = image.filename
     }
 
     const goods = new Goods({
         name: name,
         category: category,
         condition: condition,
+        price: price,
         description: description,
         image: imagePath,
         location: location,
@@ -160,6 +163,7 @@ exports.getProductEdit = (req, res, next) =>{
 exports.postProductEdit = (req, res, next)=>{
     const getId = req.body.productId
     const name = req.body.name
+    const price = req.body.price
     const category = req.body.category
     const condition = req.body.condition
     const image = req.file
@@ -184,10 +188,11 @@ exports.postProductEdit = (req, res, next)=>{
         
         let imagePath
         if(image){
-            imagePath = image.path
+            imagePath = image.filename
         }
 
         goods.name = name
+        goods.price = price
         goods.category = category
         goods.condition = condition
         goods.image = imagePath

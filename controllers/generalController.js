@@ -1,14 +1,25 @@
 const Goods = require('../models/goods')
 
-exports.goodsLists = (req, res, next) => {
-    Goods.find()
-    .then(goods => {
-        res.render('general/homePage', {
+exports.goodsLists = async (req, res, next) => {
+    const page = req.params.page || 1
+    const perPage = 4
+
+
+    try{
+    const goods = await Goods.find()
+        .skip((perPage * page) - perPage)
+        .limit(perPage)
+    const availableGoods = Goods.countDocuments()
+    res.render('general/homePage', {
             allGoods: goods,
+            currentPage: page,
+            pages: availableGoods / perPage, 
             pageTitle: 'Home'
         })
-    })
-    .catch(error => console.log(error))
+    }catch(error){
+        console.log(error)
+        next(error)
+    }
 }
 
 
