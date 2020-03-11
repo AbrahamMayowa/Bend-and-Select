@@ -2,7 +2,7 @@
 
     <nav class="main-nav">
         <section class="nav-wrapper">
-        <a href="/">
+        <a href="/1">
             <div class="logo">
                 <i class="fas fa-shopping-cart"></i>
                 B&S
@@ -18,7 +18,7 @@
             </li>
 
             <li class="nav-form">
-                <form method="GET" action="#">
+                <form method="GET" action="/search/1">
                     <input type="text" name="search" id="search" placeholder="search a product">
                 </form>
                 
@@ -40,7 +40,7 @@
                 <li>
                 <form action="/logout" method="POST">
                     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                    <button type="submit">Logout</button> 
+                    <input class="logout" type="submit" value="Logout" />
                 </form>
                 </li>
             <% } %>
@@ -48,7 +48,7 @@
         </div>
         </section>
         <div class="mobile-search-form">
-            <form method="GET" action="#" class="mobile-form">
+            <form method="GET" action="/search/1" class="mobile-form">
                 <input type="text" name="search" id="search" placeholder="Search a product">
                 <div class='close-icon'><i class="far fa-window-close"></i></div>
             </form>

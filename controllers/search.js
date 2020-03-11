@@ -1,4 +1,4 @@
-import Goods from '../models/goods'
+const Goods = require('../models/goods')
 
 exports.searchQuery = async(req, res, next)=>{
     

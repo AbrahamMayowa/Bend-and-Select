@@ -18,6 +18,7 @@
 }
 
 .secondary-advert{
+    width: 90%;
     text-align: center;
     font-weight: 400;
     font-size: 12px;
@@ -113,11 +114,12 @@ PRODUCT LIST SECTION
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    width: 100%;
 
 }
 
 .card-wrapper{
-    height: 320px;
+    height: 350px;
     width: 90%;
     display: flex;
     flex-direction: column;
@@ -125,12 +127,17 @@ PRODUCT LIST SECTION
     border-radius: 10px;
     background-color: white;
     margin-bottom: 18px;
+    justify-content: center;
     overflow: hidden;
 }
 
+a{
+    text-decoration: none;
+    color: black;
+}
 
 .goods-image{
-    height: 170px;
+    height: 200px;
     width: 100%;
 }
 
@@ -140,7 +147,7 @@ PRODUCT LIST SECTION
 }
 
 .name-wrapper{
-    height: 90px;
+    height: 50px;
     font-family: Arial, Helvetica, sans-serif;
     margin-top: 12px;
     margin-bottom: 10px;
@@ -183,6 +190,102 @@ PRODUCT LIST SECTION
     color: #483D8B;
 }
 
+.pagination-wrapper{
+    color: #483D8B;
+    font-weight: 800;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin-bottom: 12px;
+}
+
+
+.pagination-wrapper a{
+    text-decoration: none;
+}
+
+
+/*
+
+Trending section styling
+
+*/
+
+
+.trending-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+
+.trend-wrapper{
+    border-radius: 10px;
+    margin-bottom: 12px;
+    width: 80%;
+    display: flex;
+    height: 100px;
+    color: black;
+    background-color: white;
+
+}
+
+.trend-image{
+    width: 40%;
+    height: 100%;
+}
+
+.trend-image img{
+    height: 100%;
+    width: 100%;
+}
+
+.trend-info{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    height: 100%;
+}
+
+.trend-name{
+    margin-top: 5px;
+    padding: 4px;
+    height: 70%;
+    width: 80%;
+    text-align: center;
+    font-weight: 500;
+    font-family: Arial, Helvetica, sans-serif;
+    text-overflow: ellipsis;
+}
+
+.trend-review-price{
+    display: flex;
+    justify-content: space-between;
+}
+
+.trend-price{
+    color: green;
+    margin-right: 10px;
+}
+
+.trend-review{
+    margin-left: 10px;
+}
+
+.trending-header{
+    font-weight: 800;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 4px;
+    color: rgb(15, 13, 29);
+}
+
+.trend-card-wrapper{
+    background-color: tomato;
+}
+
+
+
+
+
 /*
 
 FOR 700 AND ABOVE SCREEN
@@ -202,6 +305,39 @@ FOR 700 AND ABOVE SCREEN
     .category-text{
         font-size: 22px;
         margin-bottom: 0px;
+    }
+
+    .item-wrapper{
+        flex-direction: row;
+        padding: 10px;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    
+    }
+    .card-wrapper{
+        margin-right: 12px;
+        border-radius: 12px;
+        overflow: hidden;
+        width: 38%;
+    }
+
+    .trending-section{
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+    }
+    
+    
+    .trend-wrapper{
+        width: 40%;
+        height: 100px;
+        margin-right: 12px;
+    
+    }
+    .trending-header{
+        margin-left: 66px;
     }
     
 

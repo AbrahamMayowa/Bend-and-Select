@@ -9,6 +9,7 @@ const crypto = require('crypto')
 
 
 const {validationResult} = require('express-validator')
+const imageDelete = require('../utils/deleteImage')
 
 
 const sgMail = require('@sendgrid/mail');
@@ -30,7 +31,7 @@ exports.getSellerSignUp = (req, res, next) => {
 }
 
 exports.generalSignUpPage = (req, res, next)=>{
-    res.render('auth/generalSignUp', {
+    res.status(200).render('auth/generalSignUp', {
         pageTitle: 'Sign Up',
         errorMessage: ''
     })
@@ -84,17 +85,17 @@ exports.buyerSignUp = (req, res, next) => {
         })
         .then(newUser => {
             if(!newUser){
-                return res.redirect('/')
+                return res.redirect('/1')
             }
             req.session.user = newUser
             req.session.isAuthenticated = true
             req.session.isSeller = false
-            return res.redirect('/')
+            return res.redirect('/1')
     })
     .catch(error => {
         const err = new Error(error)
         err.httpStatusCode = 500
-        return next(err)
+        next(err)
     })
 
 }
@@ -121,6 +122,7 @@ exports.sellerSignUp = (req, res, next) => {
     const errors = validationResult(req)
 
     if(!errors.isEmpty()){
+        imageDelete(image.path)
         return res.status(422).render('auth/sellerSignUp', {
             pageTitle: 'Sign Up',
             errorMessage: errors.array()[0].msg
@@ -147,12 +149,12 @@ exports.sellerSignUp = (req, res, next) => {
         })
         .then(newUser => {
             if (!newUser){
-                return res.redirect('/');
+                return res.redirect('/1');
             };
             req.session.user = newUser;
             req.session.isAuthenticated = true;
             req.session.isSeller = true;
-            return res.redirect('/')            
+            return res.redirect('/1')            
         })
         .catch(err => {
             const error = new Error(err)
@@ -167,10 +169,15 @@ exports.sellerSignUp = (req, res, next) => {
 
 
 exports.getLogin = (req, res, next) => {
+    let loginMessage = null;
+    if(req.query.loginMessage){
+        loginMessage = req.query.loginMessage
+    }
     res.render('auth/login',{
         pageTitle: 'Login',
         errorMessage: '',
-        provideEmail: ''
+        provideEmail: '',
+        authMessage: loginMessage
 
     })
 }
@@ -183,10 +190,11 @@ exports.postBuyerLogin = (req, res, next) =>{
     const error = validationResult(req)
 
     if(!error.isEmpty()){
-        return res.render('auth/buyerLogin',{
+        return res.render('auth/login',{
             pageTitle: 'Login',
             errorMessage: error.array()[0].msg,
-            provideEmail: email
+            provideEmail: email,
+            authMessage: null
     
         })
     }
@@ -194,20 +202,22 @@ exports.postBuyerLogin = (req, res, next) =>{
     Buyer.findOne({email: email})
     .then(user => {
         if(!user){
-            return res.render('auth/buyerLogin',{
+            return res.render('auth/login',{
                 pageTitle: 'Login',
                 errorMessage: 'Email or password is not valid',
-                provideEmail: email
+                provideEmail: email,
+                authMessage: null
         
             })
         }
         bcrypt.compare(password, user.password)
         .then(match => {
             if(!match){
-                return res.render('auth/buyerLogin',{
+                return res.render('auth/login',{
                     pageTitle: 'Login',
                     errorMessage: "Email or Password is not valid",
-                    provideEmail: email
+                    provideEmail: email,
+                    authMessage: null,
             
                 })
             }
@@ -216,7 +226,7 @@ exports.postBuyerLogin = (req, res, next) =>{
             req.session.isSeller = false
             // redirect to home page for now
             return req.session.save(err => {
-                res.redirect('/')
+                res.redirect('/1')
             })
         })
         .catch(error => {
@@ -236,14 +246,18 @@ exports.postBuyerLogin = (req, res, next) =>{
 exports.postSellerLogin = (req, res, next) => {
     const email = req.body.email
     const password = req.body.password
+    const redirectRoute = req.body.redirect
+
+
 
     const error = validationResult(req)
 
     if(!error.isEmpty()){
-        return res.render('auth/sellerLogin',{
+        return res.render('auth/login',{
             pageTitle: 'Login',
             errorMessage: error.array()[0].msg,
-            provideEmail: email
+            provideEmail: email,
+            authMessage: redirectRoute ? redirectRoute : null
         })
 
     }
@@ -251,27 +265,31 @@ exports.postSellerLogin = (req, res, next) => {
     Seller.findOne({email: email})
     .then(user => {
         if(!user){
-            return res.render('auth/sellerLogin',{
+            return res.render('auth/login',{
             pageTitle: 'Login',
             errorMessage: 'Email or Password is not valid',
-            provideEmail: email
+            provideEmail: email,
+            authMessage: redirectRoute ? redirectRoute : null
         })
         }
 
         bcrypt.compare(password, user.password)
         .then(match => {
             if(!match){
-             return res.render('auth/sellerLogin',{
+             return res.render('auth/login',{
                 pageTitle: 'Login',
                 errorMessage: "Email or password is not valid",
-                provideEmail: email
+                provideEmail: email,
+                authMessage: redirectRoute ? redirectRoute : null
             })
         }
             req.session.isAuthenticated = true
             req.session.user = user
             req.session.isSeller = true
             return req.session.save(err => {
-                res.redirect('/')
+                if(redirectRoute === "admin"){
+                    res.redirect('/admin/homepage')
+                }else{res.redirect('/1')}
             })
         })
         .catch(error => {
@@ -535,7 +553,7 @@ exports.postNewPassword =(req, res, next)=>{
             })
             .catch(err =>{
                 const error = new Error(err)
-                error.httpStatusCode =500
+                error.httpStatusCode = 500
                 next(error)
             })
         })
@@ -547,14 +565,13 @@ exports.postNewPassword =(req, res, next)=>{
         
     }
     else{
-        return res.status(500).redirect('/')
+        return res.status(500).redirect('/1')
     }
 
 }
 
 exports.logOut = (req, res, next)=>{
     req.session.destroy(error =>{
-        console.log(error)
-        return res.redirect('/')
+        return res.redirect('/1')
     })
 }

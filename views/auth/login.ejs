@@ -4,6 +4,10 @@
 
 
 <main>
+    <% if(authMessage) {%>
+    <div class='auth-message'><%= authMessage %></div>
+    <% } %>
+
     Login  as buyer
     <div class="user-login-form">
     <div class="buyer-login">
@@ -33,6 +37,7 @@
     <div>
         <form method="POST" action="/login/seller">
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <input type="hidden" name="redirect" value="<% if (authMessage) { %>admin<% } %>">
 
             <label for="email">email</label>
             <input type="email" name="email" id="email" value="<%= provideEmail %>">
@@ -40,7 +45,7 @@
             <label for="password">password</label>
             <input type="password" name="password" id="password">
 
-            <button type="submit">Login In</button>
+            <button type="submit">Login</button>
 
         </form>
     </div>

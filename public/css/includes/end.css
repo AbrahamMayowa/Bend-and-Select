@@ -1,0 +1,41 @@
+.footer-wrapper{
+    background-color: black;
+    color: rgb(255, 255, 255);
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    clip-path: polygon(0 29%, 100% 0, 100% 100%, 0% 100%);
+    width: 100%;
+    
+}
+
+.website-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    margin-top: 30px;
+    margin-bottom: 12px;
+}
+
+.copywrite{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: small;
+}
+
+.name-footer{
+    font-weight: 800;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.media-icon{
+    margin: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+}

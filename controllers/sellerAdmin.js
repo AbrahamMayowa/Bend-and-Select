@@ -10,7 +10,8 @@ exports.adminHome = (req, res, next) => {
         res.render('sellerAdmin/adminHome', {
             allGoods: goods,
             pageTitle: 'Admin',
-            successInfo: successInfo.length > 0 ? successInfo[0] : null
+            successInfo: successInfo.length > 0 ? successInfo[0] : null,
+            requestUser: req.user
         })
     })
     .catch(error => {
@@ -27,6 +28,7 @@ exports.getAddProduct = (req,res, next) =>{
     const successInfo = req.flash('productAddSuccess')
     res.render('sellerAdmin/getAddProduct', {
         pageTitle: 'Add Product',
+        price: '',
         name: '',
         image: '',
         description: '',
@@ -62,9 +64,11 @@ exports.postAddProduct = (req, res, next)=>{
     const error = validationResult(req)
 
     if(!error.isEmpty()){
+        imageDelete(image.path)
         return res.render('sellerAdmin/getAddProduct', {
             pageTitle: 'Add Product',
             name: name,
+            price,
             description: description,
             errorMessage: error.array()[0].msg,
             
@@ -78,6 +82,7 @@ exports.postAddProduct = (req, res, next)=>{
 
     const goods = new Goods({
         name: name,
+        createdDate: Date.now(),
         category: category,
         condition: condition,
         price: price,
@@ -86,13 +91,8 @@ exports.postAddProduct = (req, res, next)=>{
         location: location,
         review: {
             buyerReview: [],
-            reviewRanking: {
-                five: 0,
-                four: 0,
-                three: 0,
-                two: 0,
-                one: 0
-            }
+            reviewRanking: {},
+            reviewAverage: {}
         },
         goodsSeller: req.user._id
     })

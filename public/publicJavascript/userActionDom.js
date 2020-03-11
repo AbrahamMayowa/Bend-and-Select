@@ -19,9 +19,11 @@ const wishlist = btn => {
       .then(data => {
         if(data.message === 'wishAdded'){
           btn.textContent = ' Remove Wishlist'
+          btn.className = 'wishlist-button'
         }
         else if(data.message === 'wishRemoved'){
           btn.textContent = 'Add wishlist'
+          btn.className = 'wishlist-button'
         }
         
       })

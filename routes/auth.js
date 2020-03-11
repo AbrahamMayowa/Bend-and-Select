@@ -106,7 +106,7 @@ router.get('/login', auth.getLogin)
 
 
 router.post('/login/buyer',[
-    body('email', 'Procide a valid email' ).trim().isEmail(),
+    body('email', 'Provide a valid email' ).trim().isEmail(),
 ], auth.postBuyerLogin)
 
 

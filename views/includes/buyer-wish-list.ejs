@@ -1,13 +1,18 @@
 <div>
     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
     <input type="hidden" name="productId" value="<%= productId %>">
-    <button class="btn" type="button" onclick="wishlist(this)" wishlist='<%= wishlist %>'>
+    <div class="btn" onclick="wishlist(this)" wishlist='<%= wishlist %>'>
+        <% if(isAuthenticated && !isSeller) {%>
             <% if(wishlist) {%>
-                Remove Wishlist
+                <div class="wishlist-button">Remove Wishlist</div>
                 <% } else {%>
-                    Add wishlist
+                    <div class="wishlist-button">Add wishlist</div>
                     <% } %>
-    </button>
+        <%}else {%>
+            <span class="wishlist-text">Login as buyer to add wishlist</span>
+        <% } %>
+                
+    </div>
     
 
 </div>

@@ -15,9 +15,8 @@ router.get('/homepage', isSeller.onlySeller, sellerAdmin.adminHome)
 router.get('/add-product',isSeller.onlySeller, sellerAdmin.getAddProduct)
 
 router.post('/add-product',[
-    body('name', 'Provide a valid product name').isLength({min: 5}).withMessage('Product name should be at least 5 characters long').isString().trim(),
+    body('name', 'Provide a valid product name').isLength({min: 5}).withMessage('Product name should be at least 5 characters long').isString().trim().isLength({max: 30}).withMessage('Product name 30 characters max'),
     body('category', 'Product category is required').not().isEmpty(),
-    body('price', 'Price is required').not().isNumeric().withMessage('Price must be digit number'),
     body('condition', 'Product condition is required').not().isEmpty(),
     body('location', 'Provide a valid location').not().isEmpty(),
     body('description', 'Provide a detailed description of the product').not().isEmpty().isLength({min: 10}).withMessage('Product description should be at least 10 characters long')

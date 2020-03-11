@@ -1,4 +1,4 @@
-<%- include('../includes/head.ejs', {pageTitle: pageTitle, specificCssLink: '/css/generalPage/homepage.css'}) %>
+<%- include('../includes/head.ejs', {pageTitle: pageTitle}) %>
 
 
 <%- include('../includes/navHeader.ejs') %>
@@ -8,49 +8,53 @@
         <p class="primary-advert">Sell and buy your house clearance product</p>
         <p class="secondary-advert">Look for a perfect home clearance product, contact seller and shedule the shipping</p> 
         <div class="homepage-search-input">
-            <form method="GET" action="#" class="form-flex">
+            <form method="GET" action="/search/1" class="form-flex">
             <input type="text" name="search" id="search" placeholder="Search all products">
             <div class="homepage-search"><button class="button-style" type="submit"><i class="fas fa-search fa-lg"></i></button></div>
             </form>
-            
         </div>
     </section>
 
     <section class="item-list">
         <div class="category-text">Category</div>
         <div class="filter">
-            <div class="filter-item">
+            <a href="/search/1?filter=mobile-phone-tablet" class="filter-item">
                 <i class="fas fa-mobile fa-lg"></i>
-            </div>
-            <div class="filter-item">
+            </a>
+
+            <a href="/search/1?filter=bags" class="filter-item">
                 <i class="fas fa-shopping-bag fa-lg"></i>
-            </div>
-            <div class="filter-item">
-                <i class="fas fa-desktop fa-lg"></i>
-            </div>
-            <div class="filter-item">
-                <i class="fas fa-headphones-alt fa-lg"></i>
-            </div>
-            <div class="filter-item">
-                <i class="fas fa-car fa-lg"></i>
-            </div>
+            </a>
+
+            <a href="/search/1?filter=computer-accessories" class="filter-item">
+                    <i class="fas fa-desktop fa-lg"></i>
+            </a>
+
+            <a href="/search/1?filter=audio-music-equipment" class="filter-item">
+                    <i class="fas fa-headphones-alt fa-lg"></i>
+            </a>
+
+            <a href="/search/1?filter=vehicle" class="filter-item">
+                    <i class="fas fa-car fa-lg"></i>
+            </a>
             
-            <div class="filter-item">
-                <i class="fas fa-blender-phone fa-lg"></i>
-            </div>
-            <div class="filter-item">
-                <i class="fas fa-charging-station fa-lg"></i>
-            </div>
+            <a href="/search/1?filter=home-appliances" class="filter-item">
+                    <i class="fas fa-blender-phone fa-lg"></i>
+            </a>
+
+            <a href="/search/1?filter=electrical-equipment" class="filter-item">
+                    <i class="fas fa-charging-station fa-lg"></i>
+            </a>
         </div>
   
         <section class='item-wrapper'>
                 <% if (allGoods.length > 0) { %>
 
                     <% for (let goods of allGoods) { %>
-                        <div class="card-wrapper">
+                        <a href="/product/<%=goods._id %>" class="card-wrapper">
                            
                             <div class="goods-image">
-                                <img src='<%= goods.image %>' alt="product image" />
+                                <img src='/image/<%= goods.image %>' alt="product image" />
                             </div>
 
                             <div class="name-wrapper">
@@ -59,7 +63,7 @@
 
                             <div class="condition-price">
                                 <div class="product-condition"><%= goods.condition %></div>
-                                <div class="product-price"># 50000</div>
+                                <div class="product-price">#<%= goods.price %></div>
                             </div>
 
                             <div class="review-location">
@@ -75,7 +79,9 @@
                                     <%= goods.location %>
                                 </div>
                             </div>
-                        </div>
+                        </a>
+                        
+
                     <% } %>
         
                 <% } else { %>
@@ -83,9 +89,78 @@
                     <%- include('../includes/noItem.ejs', {}) %>
               
                 <% } %>
+                <div class="pagination-wrapper">
+                    <% if (currentPage == 1 && pages > 1) { %> 
+                     <a 
+                       href="/<%= parseInt(currentPage) + 1 %>">
+                       <span>
+                         Page <%=  parseInt(currentPage) + 1 %>
+                        <i class="fas fa-angle-double-right"></i>
+                       </span>
+                     </a>  <% } else if (currentPage < pages) { %>
+                    <a 
+                      href="/<%= parseInt(currentPage) - 1 %>">
+                      <span>
+                       <i class="fas fa-angle-double-left"></i>
+                         Page <%= parseInt(currentPage) - 1 %>
+                      </span>
+                    </a>   <a 
+                      href="/<%= parseInt(currentPage) + 1 %>">
+                      <span>
+                        Page <%= parseInt(currentPage) + 1 %>
+                       <i class="fas fa-angle-double-right"></i>
+                      </span>
+                    </a> <% } else if (currentPage == pages && pages > 1) { %>
+                   <a 
+                     href="/<%= parseInt(currentPage) - 1 %>">
+                     <span>
+                       <i class="fas fa-angle-double-left"></i> Page 
+                      <%=parseInt(currentPage) - 1 %>
+                     </span>
+                   </a>   <% } %>
+                   </div>
+        </section>
+       
+    </section>
+    <div class="trending-header">
+        Trending
+    </div>
+    <section class="trending-section">
+       
+        <% for(let trend of trending) { %>
+                <div class="trend-wrapper">
+
+
+                    <div class="trend-image">
+                        <img src="/image/<%= trend.image %>">
+                    </div>
+
+
+                    <div class="trend-info">
+
+                        <div class="trend-name">
+                            <%= trend.name %>
+                        </div>
+
+                        <div class="trend-review-price">
+
+                            <div class="trend-review">
+                            <span class="fa fa-star checked-review"></span>
+                            <%= trend.review.reviewAverage.averageScore %>
+                            </div>
+
+                            <div class="trend-price">#<%= trend.price %></div>
+
+                        </div>
+
+                    </div>
+                </div>
+                    <% } %>
+            
     </section>
 </main>
+    <%- include('../includes/end.ejs') %>
 
 
-<%- include('../includes/end.ejs') %>
+
 

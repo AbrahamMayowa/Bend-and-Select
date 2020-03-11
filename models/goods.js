@@ -43,7 +43,7 @@ const goodsSchema = new Schema({
         required: true
     },
 
-    createDate: {
+    createdDate: {
         type: Date,
         dafault: Date.now
     },
@@ -58,19 +58,24 @@ const goodsSchema = new Schema({
         ],
         reviewRanking: {
             five: {
-                type: Number
+                type: Number,
+                default: 0
             },
             four: {
-                type: Number
+                type: Number,
+                default: 0
             },
             three: {
-                type: Number
+                type: Number,
+                default: 0,
             },
             two: {
-                type: Number
+                type: Number,
+                default: 0,
             },
             one: {
-                type: Number
+                type: Number,
+                default: 0
             }
 
         },
@@ -115,9 +120,34 @@ goodsSchema.methods.addReview = function(raterId, rateRank){
     const updateBuyerReview = [...this.review.buyerReview]
     updateBuyerReview.push({reviewer: raterId})
     this.review.buyerReview = updateBuyerReview
+    typeof(rateRank)
 
-    const updateRank = updateReview[rateRank] + 1
-    updateReview[rateRank] = updateRank
+
+    // to provide lateral value for the reviewRanking
+    let rankValue
+    switch (rateRank) {
+        case 1:
+            rankValue = 'one'
+            break;
+        case 2:
+            rankValue = 'two'
+            break;
+        case 3:
+            rankValue = 'three'
+            break;
+
+        case 4:
+            rankValue = 'four'
+            break;
+
+        case 5:
+            rankValue = 'five'
+            break;
+    }
+
+  
+    const updateRank = updateReview[rankValue] + 1
+    updateReview[rankValue] = updateRank
     this.review.reviewRanking = updateReview
     return this.save()
 

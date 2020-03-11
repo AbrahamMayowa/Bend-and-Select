@@ -3,71 +3,199 @@
 
 <%- include('../includes/navHeader.ejs') %>
 
-<main>
-    <%= productDetails.name %>
+<main class="details-main">
 
-    <%=productDetails._id %>
-    
-    <div>
-        <%= productDetails.description %>
+    <div class="product-details-wrapper">
+        <section class="image-info">
+            <div class="product-image"><img src="/image/<%= productDetails.image %>" alt="product image" /></div>
+            <div class="name-location-price-action">
+                <div class="product-name"><%= productDetails.name %></div>
+                <div class="location-price">
+                    <div class="product-location">
+                        <i class="fas fa-map-marker-alt location-icon"></i>
+                        <%= productDetails.location %>
+                    </div>
+                    <div class="product-price">#30,000</div>
+                </div>
+
+                <div class="posted-on">
+                    <div class="posted-on-text">
+                        Posted:
+                    </div>
+                    <div class="posted-on-value">
+                        <i class="far fa-clock"></i>
+                        <%= productPostedOn %>
+                    </div>
+                </div>
+                <div class="action">
+                    <div class="review-action">
+                        <% if(isAuthenticated && !isSeller) { %>
+
+                            <% if (!checkReview) { %>
+                                <div class="review-button">Review</div>
+                            <% } else { %>
+                                <div class="review-text">Reviewed</div>
+                
+                            <% } %>
+
+                        <% } else if (isSeller) { %>
+                            <div class='review-text'>Seller can't review</div>
+
+                        <% } else if(!isAuthenticated && !isSeller) { %>
+                                <div class="review-text">login to review</div>
+
+                        <% } %>
+                                  
+                    </div>
+                    <div class="wishlist-action">
+                        <%- include('../includes/buyer-wish-list.ejs', {wishlist: wishlist, productId: productDetails._id}) %>   
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="specification">
+            <div class="details-header">Performance / Specification</div>
+            <div class="product-condition">
+                <span class="product-condition-text">Condition</span>
+                <span class="specification-value"><%= productDetails.condition %></span>
+            </div>
+
+            <div class="product-category">
+                <span class="product-category-text">Category</span>
+                <span class="specification-value"><%= productDetails.category %></span>
+            </div>
+        </section>
+
+        <section class="description">
+            <div class="details-header">Description</div>
+            <div class="product-details">
+                <%= productDetails.description %>
+            </div>
+        </section>
+
+        <section class="product-review">
+            <div class="review-heading">
+                
+                <span class="review-average">
+                    Product Rating
+                    <span class="fa fa-star <%if(productDetails.review.reviewAverage.averageScore >= 1) {%>checked-review <%}%>"></span>
+                    <span class="fa fa-star <%if(productDetails.review.reviewAverage.averageScore >= 2) {%>checked-review <%}%>"></span>
+                    <span class="fa fa-star <%if(productDetails.review.reviewAverage.averageScore >= 3) {%>checked-review <%}%>"></span>
+                    <span class="fa fa-star <%if(productDetails.review.reviewAverage.averageScore >= 4) {%>checked-review <%}%>"></span>
+                    <span class="fa fa-star <%if(productDetails.review.reviewAverage.averageScore >= 5) {%>checked-review <%}%>"></span>
+                </span>
+                <div class="review-number">
+                  <%= productDetails.review.reviewAverage.averageScore %> averge ranking based on <%= productDetails.review.reviewAverage.lengthCount %>
+                <% if(productDetails.review.reviewAverage.lengthCount > 1) {%> reviews <%} else {%> review <% } %> 
+                </div> 
+            </div>
+            <div class="review-star">
+                <div class="star-value-wrapper">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>   
+                </div>
+                <div class="review-value"><%= productDetails.review.reviewRanking.five %></div>
+            </div>
+
+            <div class="review-star">
+                <div class="star-value-wrapper">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                   
+                </div>
+                <div class="review-value"><%= productDetails.review.reviewRanking.four %></div>
+            </div>
+
+            <div class="review-star">
+                <div class="star-value-wrapper">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    
+                </div>
+                <div class="review-value"><%= productDetails.review.reviewRanking.three %></div>
+            </div>
+
+            <div class="review-star">
+                <div class="star-value-wrapper">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                   
+                </div>
+                <div class="review-value"><%= productDetails.review.reviewRanking.two %></div>
+            </div>
+
+            <div class="review-star">
+                <div class="star-value-wrapper">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                </div>
+                <div class="review-value"><%= productDetails.review.reviewRanking.one %></div>
+            </div>
+
+        </section>
     </div>
-    <% if(isAuthenticated && !isSeller) { %>
+    
+    <section class="seller-details">
+        <div class="seller-image-name">
+            <div class="seller-image"><img src="/image/<%= productDetails.goodsSeller.image %>" /></div>
+            <span class="seller-name"><%= productDetails.goodsSeller.name %></span>
+        </div>
 
-        <% if (!checkReview) { %>
-    <div>
-        <form action="/review/" method="POST">
+        <div class="join-number">
+            <div class="joined-on">
+                <div class="join-text">
+                    <i class="far fa-clock"></i>
+                    Join
+                </div>
+                <%= userJoined %>
+            </div>
+            
+            <div class="number">
+                <div class="seller-number-text">
+                    <i class="fas fa-mobile-alt"></i>
+                    Seller's Number
+                </div>
+                <%= productDetails.goodsSeller.phoneNumber %>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="review-form-wrapper ">
+        <form action="/review" method="POST" class="form-review">
             <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>">
             <input type="hidden" name="productId" id="productId" value="<%= productDetails._id %>">
-            <select name="review">
-                <option value=1 >poor</option>
-                <option value=2 >good</option>
-                <option value=3 >very good</option>
-                <option value=4>exellent</option>
-                <option value=5>outstanding</option>
-            </select>
-            <button type="submit">submit</button>
-
+            <input type="hidden" name="reviewValue" id="reviewValue" value="">
+            <div class="review-instruction">Click on icon to pick review value</div>
+            <div class="review-dom-wrapper">
+                <span data-review=1 class="fa fa-star checked" onclick="reviewHandle(this)"></span>
+                <span data-review=2 class="fa fa-star" onclick="reviewHandle(this)"></span>
+                <span data-review=3 class="fa fa-star" onclick="reviewHandle(this)"></span>
+                <span data-review=4 class="fa fa-star" onclick="reviewHandle(this)"></span>
+                <span data-review=5 class="fa fa-star" onclick="reviewHandle(this)"></span>
+            </div>
+            <div class="submit-cancel">
+                <div class="review-submit">submit</div>
+                <span class="cancel-review">cancel</span>
+            </div>
         </form>
-    </div>
-    <% } else { %>
-        You have already review the goodsSeller
-
-    <% } %>
-
-    <div>
-        <%- include('../includes/buyer-wish-list.ejs', {wishlist: wishlist}) %>
-    </div>
-
-    <div>
-        <%- include('../includes/review-product.ejs') %>
-    </div>
-
-
-    <% } else { %>
-
-        <p>log in to review</p>
-
-    <% } %>
-
-
-    <% if(requestUser && productDetails){ %>
-
-
-        <% if(productDetails.goodsSeller.toString() === requestUser.toString()) { %>
-        <div>
-            <a href="/admin/product-edit/<%= productDetails._id %>">Edit</a>
         </div>
-
-        <div>
-            <form method="POST" action="/admin/product-delete">
-                <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>">
-                <input type="hidden" name="productId" value="<%= productDetails._id %>">
-                <button type="submit">delete</button>
-            </form>
-        </div>
-
-        <% } %>
-    <% } %>
 
 </main>
 

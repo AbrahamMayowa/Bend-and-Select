@@ -1,0 +1,456 @@
+
+.checked{
+    color: orange
+}
+
+.product-details-wrapper{
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.image-info{
+
+    background-color: white;
+    display: flex;
+    width: 90%;
+    align-self: center;
+    flex-direction: column;
+    height: 350px;
+    border-bottom: 1px solid #E6E6FA;
+    margin-top: 12px;
+
+}
+
+.image-info .product-image{
+    height: 180px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.product-image img{
+    width: 100%;
+    height: 100%;
+}
+
+.name-location-price-action{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 12px;
+    justify-content: center;
+    align-items: center;
+}
+
+.location-icon{
+    color: #483D8B;
+}
+
+.product-name{
+    font-size: 16px;
+    text-align: center;
+    width: 100%;
+    height: 50px;
+}
+
+.location-price{
+    width: 100%;
+    display: flex;
+    height: 35px;
+    justify-content: space-between;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.product-location, .product-name{
+    margin-left: 6px;
+}
+
+
+.posted-on{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-right: 6px;
+    padding-left: 6px;
+    margin-left: 6px;
+    height: 30px;
+    margin-bottom: 8px;
+    font-weight: 800;
+    color: #483D8B;
+
+}
+.posted-on-value{
+    color: gray;
+}
+
+.action{
+
+    width: 100%;
+    height: 45px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.review-action, .wishlist-action{
+color: #483D8B;
+text-align: center;
+cursor: pointer;
+}
+
+.review-button, .wishlist-button{
+    margin-left: 6px;
+    margin-right: 6px;
+    font-weight: 800;
+    border-radius: 7px;
+    padding: 11px;
+    height: 35px;
+    color: white;
+    background-color: #483D8B;
+    box-sizing: border-box;
+}
+
+.review-text, .wishlist-text{
+    padding: 3px;
+}
+
+/*
+SPECIFICATION
+*/
+
+.specification{
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 90%;
+    background-color: white;
+    height: 75px;
+    margin-top: 12px;
+    border-bottom: 1px solid #E6E6FA;
+    border-top: 1px solid #E6E6FA;
+
+
+}
+
+.product-condition, .product-category{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.details-header{
+    color: gray;
+    font-weight: 800;
+    margin-bottom: 8px;
+    padding-left: 8px;
+    margin-top: 4px;
+}
+
+.product-condition-text{
+    font-weight: 800;
+    font-size: 12px;
+}
+
+.product-category-text{
+    font-weight: 800;
+    font-size: 12px;
+    padding-left: 6px;
+    
+}
+
+.specification-value{
+    color: #DAA520;
+    padding-right: 6px;
+}
+
+
+/*
+Description
+
+*/
+.description{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 90%;
+    background-color: white;
+    height: 150px;
+    border-bottom: 1px solid #E6E6FA;
+}
+
+.product-details{
+    padding: 12px;
+    text-overflow: clip;
+    height: 130px;
+}
+
+
+/*
+Product Review
+
+*/
+
+.product-review{
+    display: flex;
+    flex-direction: column;
+    height: 250px;
+    width: 90%;
+    background-color: white;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    border-top: 1px solid #E6E6FA;
+    border-bottom: 1px solid #E6E6FA;
+
+}
+
+.review-heading{
+    font-weight: 500;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin: 10px;
+    border-bottom: 5px solid #E6E6FA;
+    margin-bottom: 12px;
+}
+
+.review-average{
+    font-size: 18px;
+}
+.review-number{
+    font-size: 15px;
+    color: #483D8B;
+    margin-top: 6px;
+    margin-bottom: 15px;
+}
+
+.review-star{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+
+}
+
+.star-value-wrapper{
+    padding-left: 20px;
+    margin-bottom: 15px;
+}
+
+.review-value{
+   font-weight: 800;
+   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: #483D8B;
+    margin-bottom: 15px;
+
+}
+
+
+
+/*
+
+Seller Details
+
+*/
+
+.seller-details{
+    display: flex;
+    width: 90%;
+    flex-direction: column;
+}
+
+.seller-image-name{
+    display: flex;
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 800;
+    align-items: center;
+}
+
+.seller-image{
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-left: 35px;
+}
+
+.seller-image img{
+    height: 100%;
+    width: 100%;
+}
+
+.seller-name{
+    font-size: 20px;
+    color: #483D8B;
+    margin-left: 15px;
+    text-align: center;
+}
+
+.join-number{
+    margin-top: 12px;
+    margin-bottom: 8px;
+    width: 90%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 40px;
+    border-top: 1px solid rgb(187, 179, 179);
+    border-bottom: 1px solid rgb(187, 179, 179);
+    
+}
+
+.joined-on{
+    width: 50%;
+    border-right: 1px solid rgb(187, 179, 179);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.join-text{
+    font-weight: 800;
+    color: #483D8B;
+    font-size: 16px;
+    margin-bottom: 3px;
+}
+
+.number{
+    margin-left: 12px;
+    width: 50%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.seller-number-text{
+    margin-bottom: 3px;
+    color: #483D8B;
+    font-weight: 800;
+    font-size: 16px;
+}
+
+
+/*
+
+REVIEW MODAL FORM 
+*/
+
+
+.review-form-wrapper{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; 
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+
+.form-review{
+    background-color:#f7f7f7;
+    border: 1px solid #888;
+    width: 75%;
+    height: 180px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.review-dom-wrapper span{
+    margin-right:6px;
+    margin-bottom: 12px;
+}
+
+.submit-cancel{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+}
+
+.review-submit{
+    background-color: #483D8B;
+    color: white;
+    text-align: center;
+    font-weight: 800;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 10px;
+    height: 34px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.cancel-review{
+    color: #483D8B;
+    font-weight: 800;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    
+}
+
+.review-instruction{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+
+
+/*
+FOR 700 AND ABOVE SCREEN
+
+*/
+
+@media screen and (min-width: 700px) {
+
+    .details-main{
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .product-details-wrapper{
+        width: 55%;
+    }
+
+    .seller-details{
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 27%;
+        margin-top: 12px;
+        background-color: #F8F8FF;
+        height: 200px;
+        border: 1px solid #E6E6FA;
+    }
+
+    .seller-image-name{
+        margin-top: 7px;
+    }
+
+    .image-info{
+        height: 650px;
+    }
+
+    .image-info .product-image{
+        height: 450px;
+    }
+
+    .form-review{
+
+        width: 45%;
+        height: 230px;
+    }
+}
+
+
+

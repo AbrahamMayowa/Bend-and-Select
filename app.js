@@ -74,8 +74,9 @@ app.use(
 
 
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use(express.static(path.join(__dirname, 'public')))
-app.use(express.static(path.join(__dirname, 'images')))
+app.use(bodyParser.json())
+app.use('/public', express.static(path.join(__dirname, 'public')))
+app.use('/image', express.static(path.join(__dirname, 'images')))
 
 // file configuraitons
 app.use(
@@ -124,8 +125,9 @@ app.use((req, res, next) => {
 })
 
 
-app.use(generalRoute)
+
 app.use(auth)
+app.use(generalRoute)
 app.use('/admin', sellerAdmin)
 app.use(buyerRoute)
 app.use(searchFilter)
@@ -141,5 +143,5 @@ app.use((error, req, res, next) => {
 })
 
 mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true})
-.then(response => app.listen(5000, () => console.log('working')))
+.then(response => app.listen(3000, () => console.log('working')))
 .catch(error => console.log(error))
