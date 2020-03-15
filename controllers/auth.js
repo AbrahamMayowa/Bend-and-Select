@@ -12,16 +12,6 @@ const {validationResult} = require('express-validator')
 const imageDelete = require('../utils/deleteImage')
 
 
-const sgMail = require('@sendgrid/mail');
-
-const mailjet = require ('node-mailjet')
-.connect('47b4b4f88fa682a417e9b5f788b8083c', 'a5d21154bd00cc161313ea30dc60d23a')
-
-
-const SENDGRID_API_KEY = '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'
-
-
-
 
 exports.getSellerSignUp = (req, res, next) => {
     res.render('auth/sellerSignUp', {
@@ -57,6 +47,7 @@ exports.buyerSignUp = (req, res, next) => {
     const error = validationResult(req)
 
     if (!error.isEmpty()){
+        console.log(error.array())
         return res.status(422).render('auth/buyerSignUp', {
             pageTitle: 'Sign Up',
             errorMessage: error.array()[0].msg
@@ -171,12 +162,14 @@ exports.sellerSignUp = (req, res, next) => {
 exports.getLogin = (req, res, next) => {
     let loginMessage = null;
     if(req.query.loginMessage){
-        loginMessage = req.query.loginMessage
+        loginMessage = 'Authorization denied for non-seller account. Login first.'
     }
     res.render('auth/login',{
         pageTitle: 'Login',
-        errorMessage: '',
-        provideEmail: '',
+        sellerErrorMessage: '',
+        buyerErrorMessage: '',
+        buyerProvideEmail: '',
+        sellerProvideEmail: '',
         authMessage: loginMessage
 
     })
@@ -192,8 +185,10 @@ exports.postBuyerLogin = (req, res, next) =>{
     if(!error.isEmpty()){
         return res.render('auth/login',{
             pageTitle: 'Login',
-            errorMessage: error.array()[0].msg,
-            provideEmail: email,
+            buyerErrorMessage: error.array()[0].msg,
+            sellerErrorMessage: '',
+            sellerProvideEmail: '',
+            buyerProvideEmail: email,
             authMessage: null
     
         })
@@ -204,8 +199,10 @@ exports.postBuyerLogin = (req, res, next) =>{
         if(!user){
             return res.render('auth/login',{
                 pageTitle: 'Login',
-                errorMessage: 'Email or password is not valid',
-                provideEmail: email,
+                buyerErrorMessage: 'Email or password is not valid',
+                sellerErrorMessage: '',
+                buyerProvideEmail: email,
+                sellerProvideEmail: '',
                 authMessage: null
         
             })
@@ -216,7 +213,8 @@ exports.postBuyerLogin = (req, res, next) =>{
                 return res.render('auth/login',{
                     pageTitle: 'Login',
                     errorMessage: "Email or Password is not valid",
-                    provideEmail: email,
+                    buyerProvideEmail: email,
+                    sellerProvideEmail: '',
                     authMessage: null,
             
                 })
@@ -255,9 +253,11 @@ exports.postSellerLogin = (req, res, next) => {
     if(!error.isEmpty()){
         return res.render('auth/login',{
             pageTitle: 'Login',
-            errorMessage: error.array()[0].msg,
-            provideEmail: email,
-            authMessage: redirectRoute ? redirectRoute : null
+            sellerErrorMessage: error.array()[0].msg,
+            buyerErrorMessage: '',
+            sellerProvideEmail: email,
+            buyerProvideEmail: '',
+            authMessage: redirectRoute ? 'Authorization denied for non-seller account' : null
         })
 
     }
@@ -267,8 +267,10 @@ exports.postSellerLogin = (req, res, next) => {
         if(!user){
             return res.render('auth/login',{
             pageTitle: 'Login',
-            errorMessage: 'Email or Password is not valid',
-            provideEmail: email,
+            sellerErrorMessage: 'Email or Password is not valid',
+            buyerErrorMessage: '',
+            sellerProvideEmail: email,
+            buyerProvideEmail: '',
             authMessage: redirectRoute ? redirectRoute : null
         })
         }
@@ -278,8 +280,10 @@ exports.postSellerLogin = (req, res, next) => {
             if(!match){
              return res.render('auth/login',{
                 pageTitle: 'Login',
-                errorMessage: "Email or password is not valid",
-                provideEmail: email,
+                sellerErrorMessage: "Email or password is not valid",
+                buyerErrorMessage: '',
+                sellerProvideEmail: email,
+                buyerProvideEmail: '',
                 authMessage: redirectRoute ? redirectRoute : null
             })
         }
@@ -322,7 +326,6 @@ exports.postGetResetPassword = (req, res, next)=>{
 
 
     const token = crypto.randomBytes(32).toString('hex')
-    console.log(userStatus)
         if(userStatus === 'buyer'){
             Buyer.findOne({email: userEmail})
             .then(buyer =>{

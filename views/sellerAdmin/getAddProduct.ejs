@@ -5,50 +5,56 @@
 
 <main>
 
-    <%= errorMessage %>
+    <div class="add-product-wrapper">
 
+        <div class="add-header">
+            <span class="add-icon"><i class="fas fa-plus"></i></span>
+            <span class="add-header-text">
+                New Product
+            </span>
+        </div>
 
+            <% if(errorMessage) {%>
+            <div class="add-error-message"><%= errorMessage %></div>
+            <% } %>
    
-    <div class="form-control">
+        <div class="add-form-control">
 
-        <form action="/admin/add-product" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <form action="/admin/add-product" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
 
-        <label for="name">name</label>
-        <input type="text" name="name" id="name" value="<%= name %>">
+            <input type="text" name="name" id="name" value="<%= name %>" placeholder="Name">
 
-        <label for="price">price</label>
-        <input type="number" name="price" id="price" value="<%= price %>" >
+            <input type="number" name="price" id="price" value="<%= price %>" placeholder="Price">
 
 
 
-        <label for="category">category</label>
-        <select name="category">
-            <option value="Mobile Phone & Tablet" >Mobile Phone & Tablets</option>
-            <option value="Bags" >Bags</option>
-            <option value="Computer Accessories" >Computer Accessories</option>
-            <option value="Audio Music Equipment" >Audio & Music Equipment</option>
-            <option value="Vehicle" >Vehicle</option>
-            <option value="Home Appliances" >Home Appliances</option>
-            <option value="Electrical Equipment" >Electrical Equipment</option>
-            <option value="Electronics" >Electronics</option>
-        </select>
+            <select name="category" required> 
+                <option value="" disabled selected>Category</option>
+                <option value="Mobile Phone" >Mobile Phone</option>
+                <option value="Bags" >Bags</option>
+                <option value="Computer Accessories" >Computer Accessories</option>
+                <option value="Audio Music Equipment" >Audio Music Equipment</option>
+                <option value="Vehicle" >Vehicle</option>
+                <option value="Home Appliances" >Home Appliances</option>
+                <option value="Electrical Equipment" >Electrical Equipment</option>
+                <option value="Electronics" >Electronics</option>
+            </select>
 
-        <label for="condition">condition</label>
-        <select name="condition">
-            <option value="New" >New</option>
-            <option value="Used" >Used</option>
-        </select>
+            
+            <select name="condition" required>
+                <option value="" disabled selected>Product condition</option>
+                <option value="New" >New</option>
+                <option value="Used" >Used</option>
+            </select>
 
+    
+        <textarea name="description" rows="8"><% if(description) {%><%= description %> <%}else {%> Description <% } %></textarea>
 
-        <label for="description">description</label>
-        <textarea name="description" rows="11"><%= description %></textarea>
+            <input type="file" name="image">
 
-        <label for="image">image</label>
-        <input type="file" name="image">
-
-        <label for="location">location</label>
-        <select name="location">
+            <select name="location" required>
+                <option value="" disabled selected>Location</option>
                 <option value="Lagos" >Lagos</option>
                 <option value="Ibadan" >Ibadan</option>
                 <option value="Kano" >Kano</option>
@@ -58,13 +64,13 @@
                 <option value="Calabar" >Calabar</option>
                 <option value="Uyo" >Uyo</option>
                 <option value="Enugu" >Enugu</option>
-
-        </select>
-        <button type="submit">Submit</button>      
+            </select>
+            <input class="add-submit" type="submit" value="Submit">      
+            
+            </form> 
         
-        </form> 
-    
 
+        </div>
     </div>
 </main>
 

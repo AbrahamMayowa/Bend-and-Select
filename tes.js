@@ -43,3 +43,5 @@ five: 0,
                 three: 0,
                 two: 0,
                 one: 0
+
+                <a href="/product/<%=goods._id %>"></a>

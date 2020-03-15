@@ -4,35 +4,42 @@
 
 
 <main>
-        <div>
-                <%= errorMessage %>
-            </div>
+    <div class="signup-wrapper">
 
-    <div class="form-wrapper">
-        <form method="POST" action="/signup/seller" enctype="multipart/form-data">
-            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <div class="signup-header">
+            <span class="signup-icon"><i class="fas fa-user-plus"></i></span>
+            <span class="signup-header-text">
+                Signup as a seller
+            </span>
+        </div>
 
-            <label for="name">name</label>
-            <input type="text" name="name" id="name">
+        <div >
+            <% if(errorMessage) {%>
+            <div class="error-message"><%= errorMessage %></div>
+            <% } %>
+        </div>
 
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email">
+        <div class="signup-form-wrapper">
+            <form method="POST" action="/signup/seller" enctype="multipart/form-data">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
 
-            <label for="password">Password</label> 
-            <input type="password" name="password" id="password">
-            
-            <label for="confirm-password">Confirm Password</label>
-            <input type="password" name="password2" id="password2">
+                <input type="text" name="name" id="name" placeholder="Name">
 
-            <label for="phone number">Phone number</label>
-            <input type="number" name="phoneNumber" id="phoneNumber">
+                <input type="email" name="email" id="email" placeholder="Email">
+ 
+                <input type="password" name="password" id="password" placeholder="Password">
+                
+                <input type="password" name="password2" id="password2" placeholder="Confirmed Password">
 
-            <label for="image">Image</label>
-            <input type="file" name="image" id="image">
-            <button type="submit">SignUp</button>
+                <input type="number" name="phoneNumber" id="phoneNumber" placeholder="Phone Number">
 
-        </form>
+                <input type="file" name="image" id="image" placeholder="Image">
+                <input type="submit" id="signup-submit" value="Signup">
 
+            </form>
+
+            <div class="signin-redirect">Already registered? <a href="/login" >Login</a></div>
+        </div>
 
     </div>
 

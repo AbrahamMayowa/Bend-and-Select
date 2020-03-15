@@ -5,12 +5,12 @@ exports.searchQuery = async(req, res, next)=>{
     const search = req.query.search
     const page = req.params.page || 1
     const perPage = 5
-    const filter = req.query.filterValue
-
-    let productFound
-    let availbleGoods
+    const filter = req.query.filter
 
     try {
+        let productFound
+        let availbleGoods
+
 
     // if the request is about search for a product
     if(search){
@@ -22,7 +22,7 @@ exports.searchQuery = async(req, res, next)=>{
         availbleGoods = await Goods.countDocuments({category: filter})
     }
 
-    res.render('search', {
+    res.render('general/search', {
         products: productFound,
         numberOfProduct: availbleGoods,
         currentPage: page,
@@ -31,7 +31,7 @@ exports.searchQuery = async(req, res, next)=>{
         isFilter: filter ? true : false,
         searchWord: search ? search : null,
         filter: filter ? filter : null,
-        pages: Math.ceil(numberOfProduct / perPage),
+        pages: Math.ceil(availbleGoods / perPage),
         pageTitle: filter ? filter : 'Search'
     })
 }catch(error){

@@ -3,7 +3,7 @@ const moment = require('moment')
 
 exports.goodsLists = async (req, res, next) => {
     const page = req.params.page || 1
-    const perPage = 4
+    const perPage = 6
 
 
     try{
@@ -11,16 +11,15 @@ exports.goodsLists = async (req, res, next) => {
         .skip((perPage * page) - perPage)
         .limit(perPage)
     const availableGoods = await Goods.countDocuments()
-    const trending = await Goods.find().sort({review: -1})
+    const trending = await Goods.find().sort({review: -1}).limit(4)
     res.render('general/homePage', {
             allGoods: goods,
             currentPage: page,
-            pages: availableGoods / perPage,
+            pages: Math.ceil(availableGoods / perPage),
             trending, 
             pageTitle: 'Home'
         })
     }catch(error){
-        console.log(error)
         next(error)
     }
 }
@@ -46,10 +45,8 @@ exports.productDetails = async (req, res, next)=> {
         checkReview = goods.checkReview(req.user._id)
 
     }
-    const createdTime = new Date(goods.goodsSeller.joined).toJSON()
-    const userJoined = moment(createdTime).fromNow()
-    const productTime = new Date(goods.createdDate).toJSON()
-    const productPostedOn = moment(productTime).fromNow()
+    const userJoined = moment(goods.goodsSeller.joined).fromNow()
+    const productPostedOn = moment(goods.createdDate).fromNow()
        
     res.render('general/productDetails', {
             pageTitle: 'Product',

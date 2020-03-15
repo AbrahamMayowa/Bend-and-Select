@@ -5,8 +5,13 @@
     flex-direction: column;
     height: 300px;
     width: 100%;
-    color:black;
+    color:#483D8B;
     font-family: Arial, Helvetica, sans-serif;
+    background-image: url('/public/localImages/3523548.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: hsla(0, 0%, 0%, .50);
 }
 
 .primary-advert{
@@ -15,15 +20,21 @@
     font-size: 25px;
     margin-bottom: 6px;
     margin-top: 25px;
+    z-index: 1;
+    text-shadow: 1px 1px 4px #483D8B;
+    color: white;
+
 }
 
 .secondary-advert{
+    text-shadow: 1px 1px 2px white;
+    z-index: 1;
     width: 90%;
     text-align: center;
     font-weight: 400;
     font-size: 12px;
     margin-bottom: 12px;
-    color: #483D8B
+    color: black
 }
 
 .homepage-search-input, .form-flex{
@@ -119,8 +130,8 @@ PRODUCT LIST SECTION
 }
 
 .card-wrapper{
-    height: 350px;
-    width: 90%;
+    height: 300px;
+    width: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -137,7 +148,7 @@ a{
 }
 
 .goods-image{
-    height: 200px;
+    height: 150px;
     width: 100%;
 }
 
@@ -147,7 +158,7 @@ a{
 }
 
 .name-wrapper{
-    height: 50px;
+    height: 40px;
     font-family: Arial, Helvetica, sans-serif;
     margin-top: 12px;
     margin-bottom: 10px;
@@ -157,7 +168,7 @@ a{
 
 .condition-price, .review-location{
     margin-top: 12px;
-    height: 35px;
+    height: 30px;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -191,15 +202,26 @@ a{
 }
 
 .pagination-wrapper{
-    color: #483D8B;
+    font-size: 14px;
     font-weight: 800;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    margin-bottom: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 35px;
+    margin-top: 15px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
 }
 
 
 .pagination-wrapper a{
     text-decoration: none;
+    padding: 7px;
+    border-radius: 10px;
+    text-align: center;
+    background-color: #483D8B;
+    color: white;
+    
 }
 
 
@@ -320,18 +342,19 @@ FOR 700 AND ABOVE SCREEN
         margin-right: 12px;
         border-radius: 12px;
         overflow: hidden;
-        width: 38%;
+        width: 25%;
+
     }
 
     .trending-section{
         flex-direction: row;
         justify-content: center;
-        width: 100%;
+        flex-wrap: wrap;
     }
     
     
     .trend-wrapper{
-        width: 40%;
+        width: 30%;
         height: 100px;
         margin-right: 12px;
     

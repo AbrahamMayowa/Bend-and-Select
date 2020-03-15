@@ -2,6 +2,7 @@ const Goods = require('../models/goods')
 const imageDelete = require('../utils/deleteImage')
 
 const {validationResult} = require('express-validator')
+const moment = require('moment')
 
 exports.adminHome = (req, res, next) => {
     const successInfo = req.flash('productAddSuccess')
@@ -11,7 +12,8 @@ exports.adminHome = (req, res, next) => {
             allGoods: goods,
             pageTitle: 'Admin',
             successInfo: successInfo.length > 0 ? successInfo[0] : null,
-            requestUser: req.user
+            requestUser: req.user,
+            moment,
         })
     })
     .catch(error => {
@@ -39,7 +41,6 @@ exports.getAddProduct = (req,res, next) =>{
 
 
 exports.postAddProduct = (req, res, next)=>{
-   
     const name = req.body.name
     const category = req.body.category
     const condition = req.body.condition
@@ -111,34 +112,6 @@ exports.postAddProduct = (req, res, next)=>{
 }
 
 
-
-exports.productDetails = (req, res, next)=> {
-    const getId =  req.params.productId
-    const editInfo = req.flash('editSuccess')
-
-
-    Goods.findById(getId)
-    .then(goods => {
-
-        if(goods.goodsSeller.toString() !== req.session.user._id.toString()){
-            return res.status(401).redirect('/401')
-        }
-        return res.render('sellerAdmin/productDetails', {
-            pageTitle: 'Product',
-            productDetails: goods,
-            editInfo: editInfo.length > 0 ? editInfo[0] : null
-            
-        })
-    })
-    .catch(error => {
-        const err = new Error(error)
-        error.httpStatusCode = 500
-        return next(err)
-    })
-
-}
-
-
 exports.getProductEdit = (req, res, next) =>{
     
     const getId = req.params.productId
@@ -160,19 +133,18 @@ exports.getProductEdit = (req, res, next) =>{
 }
 
 
-exports.postProductEdit = (req, res, next)=>{
+exports.postProductEdit = async(req, res, next)=>{
     const getId = req.body.productId
     const name = req.body.name
     const price = req.body.price
+    const description = req.body.description
     const category = req.body.category
     const condition = req.body.condition
     const image = req.file
     const location = req.body.location
 
-
-    Goods.findById(getId)
-    .then(goods =>{
-
+    try{
+        const goods = await Goods.findById(getId)
         if(goods.goodsSeller.toString() !== req.user._id.toString()){
             return res.status(401).redirect('/401')
         }
@@ -186,9 +158,10 @@ exports.postProductEdit = (req, res, next)=>{
                 })
             }
         
-        let imagePath
+        let imagePath = goods.image
         if(image){
             imagePath = image.filename
+            imageDelete(`/images/${goods.image}`)
         }
 
         goods.name = name
@@ -196,35 +169,32 @@ exports.postProductEdit = (req, res, next)=>{
         goods.category = category
         goods.condition = condition
         goods.image = imagePath
-        goods.location = location
-        return goods.save()
-    })
-    .then(result =>{
+        goods.location = location,
+        goods.description = description
+        await goods.save()
+
         req.flash('editSuccess', 'Product successfully edited!')
-        return res.redirect(`/admin/product-details/${getId}`)
-    })
-    .catch(error => next(error))
+        res.redirect(`/product/${getId}`)
+    
+    }catch(error){next(error)}
 }
 
-exports.deleteProduct = (req, res, next) => {
+exports.deleteProduct = async (req, res, next) => {
     const getId = req.body.productId
 
-    Goods.findById(getId)
-    .then(goods =>{
+    try{
+    const goods = await Goods.findById(getId)
         if(goods.goodsSeller.toString() !== req.user._id.toString()){
             return res.status(401).redirect('/401')
         }
-        imageDelete.deleteFile(goods.image)
-        return Goods.deleteOne({_id: goods._id})
 
+        imageDelete(`images/${goods.image}`)
+        await Goods.deleteOne({_id: goods._id})
 
-    })
-    .then(result =>{
         req.flash('deleteProduct', 'Goods successfully deleted')
         return res.redirect('/admin/homepage')
 
-    }) 
-    .catch(error => next(error))
+    }catch(error){ next(error)}
 
 }
 

@@ -18,7 +18,7 @@ const sellerAdmin = require('./routes/sellerAdmin')
 const buyerRoute = require('./routes/buyerAction')
 const error = require('./controllers/error')
 const statusError = require('./routes/error')
-const searchFilter = require('./routes/search')
+
 
 
 const app = express()
@@ -130,7 +130,6 @@ app.use(auth)
 app.use(generalRoute)
 app.use('/admin', sellerAdmin)
 app.use(buyerRoute)
-app.use(searchFilter)
 app.use(statusError)
 
 app.use(error.error404)
@@ -143,5 +142,5 @@ app.use((error, req, res, next) => {
 })
 
 mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true})
-.then(response => app.listen(3000, () => console.log('working')))
+.then(response => app.listen(4000, () => console.log('working')))
 .catch(error => console.log(error))

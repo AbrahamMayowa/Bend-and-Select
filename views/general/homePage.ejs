@@ -5,8 +5,8 @@
 
 <main>
     <section class="advert-text-search">
-        <p class="primary-advert">Sell and buy your house clearance product</p>
-        <p class="secondary-advert">Look for a perfect home clearance product, contact seller and shedule the shipping</p> 
+        <p class="primary-advert">Sell and Buy House Clearance Sales</p>
+        <p class="secondary-advert">Look for perfect products, contact seller and shedule the shipping</p> 
         <div class="homepage-search-input">
             <form method="GET" action="/search/1" class="form-flex">
             <input type="text" name="search" id="search" placeholder="Search all products">
@@ -16,33 +16,33 @@
     </section>
 
     <section class="item-list">
-        <div class="category-text">Category</div>
+        <div class="category-text">categories</div>
         <div class="filter">
-            <a href="/search/1?filter=mobile-phone-tablet" class="filter-item">
+            <a href="/search/1?filter=Mobile+Phone" class="filter-item">
                 <i class="fas fa-mobile fa-lg"></i>
             </a>
 
-            <a href="/search/1?filter=bags" class="filter-item">
+            <a href="/search/1?filter=Bags" class="filter-item">
                 <i class="fas fa-shopping-bag fa-lg"></i>
             </a>
 
-            <a href="/search/1?filter=computer-accessories" class="filter-item">
+            <a href="/search/1?filter=Computer+Accessories" class="filter-item">
                     <i class="fas fa-desktop fa-lg"></i>
             </a>
 
-            <a href="/search/1?filter=audio-music-equipment" class="filter-item">
+            <a href="/search/1?filter=Audio+Music+Equipment" class="filter-item">
                     <i class="fas fa-headphones-alt fa-lg"></i>
             </a>
 
-            <a href="/search/1?filter=vehicle" class="filter-item">
+            <a href="/search/1?filter=Vehicle" class="filter-item">
                     <i class="fas fa-car fa-lg"></i>
             </a>
             
-            <a href="/search/1?filter=home-appliances" class="filter-item">
+            <a href="/search/1?filter=Home+Appliances" class="filter-item">
                     <i class="fas fa-blender-phone fa-lg"></i>
             </a>
 
-            <a href="/search/1?filter=electrical-equipment" class="filter-item">
+            <a href="/search/1?filter=Electrical+Equipment" class="filter-item">
                     <i class="fas fa-charging-station fa-lg"></i>
             </a>
         </div>
@@ -94,27 +94,31 @@
                      <a 
                        href="/<%= parseInt(currentPage) + 1 %>">
                        <span>
-                         Page <%=  parseInt(currentPage) + 1 %>
+                         page <%=  parseInt(currentPage) + 1 %>
                         <i class="fas fa-angle-double-right"></i>
                        </span>
-                     </a>  <% } else if (currentPage < pages) { %>
+                     </a>
+                     
+                     
+                     <% } else if (currentPage > 1 && pages > currentPage) { %>
                     <a 
                       href="/<%= parseInt(currentPage) - 1 %>">
                       <span>
                        <i class="fas fa-angle-double-left"></i>
-                         Page <%= parseInt(currentPage) - 1 %>
+                         page <%= parseInt(currentPage) - 1 %>
                       </span>
                     </a>   <a 
                       href="/<%= parseInt(currentPage) + 1 %>">
                       <span>
-                        Page <%= parseInt(currentPage) + 1 %>
+                        page <%= parseInt(currentPage) + 1 %>
                        <i class="fas fa-angle-double-right"></i>
                       </span>
-                    </a> <% } else if (currentPage == pages && pages > 1) { %>
+                    </a>
+                    <% } else if (currentPage == pages && pages > 1) { %>
                    <a 
                      href="/<%= parseInt(currentPage) - 1 %>">
                      <span>
-                       <i class="fas fa-angle-double-left"></i> Page 
+                       <i class="fas fa-angle-double-left"></i> page 
                       <%=parseInt(currentPage) - 1 %>
                      </span>
                    </a>   <% } %>
@@ -122,40 +126,7 @@
         </section>
        
     </section>
-    <div class="trending-header">
-        Trending
-    </div>
-    <section class="trending-section">
-       
-        <% for(let trend of trending) { %>
-                <div class="trend-wrapper">
 
-
-                    <div class="trend-image">
-                        <img src="/image/<%= trend.image %>">
-                    </div>
-
-
-                    <div class="trend-info">
-
-                        <div class="trend-name">
-                            <%= trend.name %>
-                        </div>
-
-                        <div class="trend-review-price">
-
-                            <div class="trend-review">
-                            <span class="fa fa-star checked-review"></span>
-                            <%= trend.review.reviewAverage.averageScore %>
-                            </div>
-
-                            <div class="trend-price">#<%= trend.price %></div>
-
-                        </div>
-
-                    </div>
-                </div>
-                    <% } %>
             
     </section>
 </main>

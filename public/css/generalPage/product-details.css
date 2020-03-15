@@ -353,7 +353,7 @@ REVIEW MODAL FORM
     background-color:#f7f7f7;
     border: 1px solid #888;
     width: 75%;
-    height: 180px;
+    height: 190px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -375,15 +375,19 @@ REVIEW MODAL FORM
 }
 
 .review-submit{
+    display: flex;
     background-color: #483D8B;
     color: white;
-    text-align: center;
     font-weight: 800;
     font-family: Arial, Helvetica, sans-serif;
     border-radius: 10px;
-    height: 34px;
+    height: 35px;
+    width: 60px;
     font-size: 16px;
+    padding: auto;
     cursor: pointer;
+    justify-content: center;
+    align-items: center;
 }
 
 .cancel-review{
@@ -417,7 +421,7 @@ FOR 700 AND ABOVE SCREEN
     }
 
     .product-details-wrapper{
-        width: 55%;
+        width: 58%;
     }
 
     .seller-details{
@@ -426,7 +430,7 @@ FOR 700 AND ABOVE SCREEN
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        width: 27%;
+        width: 22%;
         margin-top: 12px;
         background-color: #F8F8FF;
         height: 200px;

@@ -3,72 +3,75 @@
 
 <%- include('../includes/navHeader.ejs') %>
 
-<nav>
-    <ul>
-        <li>
-            <a href="/admin/add-product">Add Product</a>
-        </li>
-    </ul>
-</nav>
-
 
 
 <main>
-        <div class="successInfo"><%= successInfo %></div>
-   <p>
-       Manage your goods here!
-   </p>
-    <div class="product_list_wrapper">
-        <% if (allGoods.length > 0) { %>
 
-            <% for (let goods of allGoods) { %>
-                <div>
-                    <a href="/admin/product-details/<%= goods._id %>"><%= goods.name %></a>
+   <div class="admin-wrapper">
+        <div class="userinfo-add">
+            <div class="admin-user-info">
+                <div class="admin-user-image">
+                    <img src="/image/<%= requestUser.image %>" alt="seller image">
                 </div>
-                <div><%= goods.category %></div>
-                <div><%= goods.location %></div>
-                <%= goods.price %>
 
+                <div class="admin-user-name"><%= requestUser.name %></div>
 
-                        <div>
-                                <a href="/admin/product-edit/<%= goods._id %> ">Edit</a>
+            </div>
+
+            <a href="/admin/add-product" class="add-product">
+                    <span class="add-icon"><i class="fas fa-plus fa-lg"></i></span>
+                    <div class="add-text">Add Product</div>
+            </a>
+       </div>
+
+        <div class="product-list-wrapper">
+            <% if (allGoods.length > 0) { %>
+
+                <% for (let goods of allGoods) { %>
+
+                    <div class="admin-product-card">
+                   
+
+                        <div class="admin-product-image">
+                            <img src="/image/<%= goods.image %>" alt="product image">
+                        </div>
+
+                        <div class="product-info-action">
+                            <div class="product-info">
+                                <span class="admin-product-name"><%= goods.name %></span>
+                                <span class="admin-info">
+                                    posted:
+                                    <%= moment(goods.createdDate).fromNow() %>
+                                </span>
+                                <span class="admin-info naira"># <%= goods.price %></span>
                             </div>
-                        
-                            <div>
-                                <form method="POST" action="/admin/product-delete">
-                                    <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>">
-                                    <input type="hidden" name="productId" value="<%= goods._id %>">
-                                    <button type="submit">delete</button>
-                                </form>
-                            </div>
 
-                            <div>
-                            
-                            <% if(goods.goodsSeller.toString() === requestUser._id.toString()) { %>
-                                <div>
-                                    <a href="/admin/product-edit/<%= goods._id %>">Edit</a>
-                                </div>
-                        
-                                <div>
+                            <div class="admin-action">
+                                <div class="action"><a  href="/admin/product-edit/<%= goods._id %>">Edit</a></div>
+                                <div class="action">
                                     <form method="POST" action="/admin/product-delete">
                                         <input type="hidden" name="_csrf" id="_csrf" value="<%= csrfToken %>">
                                         <input type="hidden" name="productId" value="<%= goods._id %>">
-                                        <button type="submit">delete</button>
+                                        <input id="delete-button" type="submit" value="Delete">
                                     </form>
                                 </div>
+                            </div>
+                        </div>
+
+    
+                </div>
+                <% } %>
+
+
+            <% } else { %>
+                <div class="admin-product-card">
+                    <div class="no-good">
                         
-                                <% } %>
-
-
-                    <% } %>
-
-
-        <% } else { %>
-            <div>
-                No goods!
-            </div>
-        <% } %>
-
+                            You have not added any product.
+                        
+                    </div>
+                </div>
+            <% } %>
     </div>
 </main>
 

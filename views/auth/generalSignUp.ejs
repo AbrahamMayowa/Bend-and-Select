@@ -4,15 +4,19 @@
 
 
 
-<main>
-    <section>
-        <a href="/signup/buyer">Sign Up as buyer</a>
-    </section>
+<main class="general-signup-wrapper">
+    <div class="signup-wrapper-sub">
 
-    <section>
-        <a href="/signup/seller">Sign Up as seller</a>
-    </section>
- 
+            <a href="/signup/buyer" class="signup-redirect">
+            <span class="signup-icon"><i class="fas fa-user-plus"></i></span>
+            Signup as a buyer
+            </a>
+
+            <a href="/signup/seller" class="signup-redirect">
+            <span class="signup-icon"><i class="fas fa-user-plus"></i></span>
+            Signup as seller
+            </a>
+    </div>
 </main>
 
 <%- include('../includes/end.ejs') %>

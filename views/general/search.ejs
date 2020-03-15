@@ -1,0 +1,98 @@
+<%- include('../includes/head.ejs', {pageTitle: pageTitle}) %>
+
+
+<%- include('../includes/navHeader.ejs') %>
+
+
+<main class="search-wrapper">
+
+    <section class="search-filter-header">
+        <% if(isFilter) {%>
+            <%= numberOfProduct %> found on <%= filter %> category:
+        <% } else { %>
+            <%= numberOfProduct %> item found on "<%= searchWord %>" keyword:
+        <%} %>
+    </section>
+    <section class='item-wrapper search-filter-wrapper' >
+        <% if (products.length > 0) {%>
+            
+
+            <% for (let goods of products) { %>
+                <a href="/product/<%=goods._id %>" class="card-wrapper">
+                
+                    <div class="goods-image">
+                        <img src='/image/<%= goods.image %>' alt="product image" />
+                    </div>
+
+                    <div class="name-wrapper">
+                        <div class="product-name"><%= goods.name %></div> 
+                    </div>
+
+                    <div class="condition-price">
+                        <div class="product-condition"><%= goods.condition %></div>
+                        <div class="product-price">#<%= goods.price %></div>
+                    </div>
+
+                    <div class="review-location">
+                            <div class="review">
+                                <span class="fa fa-star <%if(goods.review.reviewAverage.averageScore >= 1) {%>checked-review <%}%>"></span>
+                                <span class="fa fa-star <%if(goods.review.reviewAverage.averageScore >= 2) {%>checked-review <%}%>"></span>
+                                <span class="fa fa-star <%if(goods.review.reviewAverage.averageScore >= 3) {%>checked-review <%}%>"></span>
+                                <span class="fa fa-star <%if(goods.review.reviewAverage.averageScore >= 4) {%>checked-review <%}%>"></span>
+                                <span class="fa fa-star <%if(goods.review.reviewAverage.averageScore >= 5) {%>checked-review <%}%>"></span>
+                            </div>
+                        <div class="location">
+                            <i class="fas fa-map-marker-alt location-icon"></i>
+                            <%= goods.location %>
+                        </div>
+                    </div>
+                </a>
+                
+
+            <% } %>
+
+        <% } else { %>
+
+            <%- include('../includes/noItem.ejs', {}) %>
+    
+        <% } %>
+        <div class="pagination-wrapper">
+            <% if (currentPage == 1 && pages > 1) { %> 
+            <a 
+            href="/<%= parseInt(currentPage) + 1 %>">
+            <span>
+                page <%=  parseInt(currentPage) + 1 %>
+                <i class="fas fa-angle-double-right"></i>
+            </span>
+            </a>
+            
+            
+            <% } else if (currentPage > 1 && pages > currentPage) { %>
+            <a 
+            href="/<%= parseInt(currentPage) - 1 %>">
+            <span>
+            <i class="fas fa-angle-double-left"></i>
+                page <%= parseInt(currentPage) - 1 %>
+            </span>
+            </a>   <a 
+            href="/<%= parseInt(currentPage) + 1 %>">
+            <span>
+                page <%= parseInt(currentPage) + 1 %>
+            <i class="fas fa-angle-double-right"></i>
+            </span>
+            </a>
+            <% } else if (currentPage == pages && pages > 1) { %>
+        <a 
+            href="/<%= parseInt(currentPage) - 1 %>">
+            <span>
+            <i class="fas fa-angle-double-left"></i> page 
+            <%=parseInt(currentPage) - 1 %>
+            </span>
+        </a>   <% } %>
+        </div>
+    </section>
+
+</main>
+
+
+<%- include('../includes/end.ejs') %>

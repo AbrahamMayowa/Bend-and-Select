@@ -4,54 +4,87 @@
 
 
 <main>
-    <% if(authMessage) {%>
-    <div class='auth-message'><%= authMessage %></div>
-    <% } %>
+    <div class="login-wrapper">
+        <% if(authMessage) {%>
+        <div class='auth-message'><%= authMessage %></div>
+        <% } %>
+        
+        <div class="login-card">
 
-    Login  as buyer
-    <div class="user-login-form">
-    <div class="buyer-login">
+            <div class="login-header">
+                <span class="login-header-icon"><i class="fas fa-user-alt"></i></span>
+                <span class="login-header-text">Login</span>
+            </div>
+
+
+            <section class="login-info">
+                <div class="login-info-form">
+                    <div class="user-error-message">
+                        <div class="user-login">
+                            Login as a buyer
+                        </div>
+
+                        <div class="error-message">
+                            <% if(buyerErrorMessage) {%>
+                            <span class="login-error-message"><%= buyerErrorMessage %></span>
+                            <% } %>
+                        </div>
+                    </div>
+
+                    <div class="user-login-form">
+                            
+                            <form method="POST" action="/login/buyer">
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+                                <input type="email" name="email" id="email" value="<%= buyerProvideEmail %>" placeholder="Email">
+
+                                <input type="password" name="password" id="password" placeholder="Password">
+
+                                <input id="login-submit" type="submit" value='Login'>
+
+                            </form>
+                            <div class="password-reset">forget password? <a href="/reset-password/buyer">Reset password</a> </div>
+                    </div>
+                </div>
+
+            
+
+                    <div class="login-info-form">
+                        <div class="user-error-message">
+                            <div class="user-login">
+                                Login as a seller
+                            </div>
+            
+                            <div class="error-message">
+                                <% if(sellerErrorMessage) {%>
+                                <span class="login-error-message"><%= sellerErrorMessage %></span>
+                                <% } %>
+                            </div>
+                        </div>
+
+                        <div class="user-login-form">
+                            <form method="POST" action="/login/seller">
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                <input type="hidden" name="redirect" value="<% if (authMessage) { %>admin<% } %>">
+
+                    
+                                <input type="email" name="email" id="email" value="<%= sellerProvideEmail %>" placeholder="Email">
+
+                                
+                                <input type="password" name="password" id="password" placeholder="Password">
+
+                                <input id="login-submit" type="submit" value='Login'>
+
+                            </form>
+
+                            <div class="password-reset">forget password ? <a href="/reset-password/seller">Reset password</a> </div>
+                        </div>
+                    </div>
+
+            </section>
+
     </div>
-        <%= errorMessage %>
-    </div>
-        <form method="POST" action="/login/buyer">
-            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-
-            <label for="email">email</label>
-            <input type="email" name="email" id="email" value="<%= provideEmail %>">
-
-            <label for="password">password</label>
-            <input type="password" name="password" id="password">
-            <button type="submit">Login In</button>
-
-        </form>
-        <div>forget password? <a href="/reset-password/buyer">Reset password</a> </div>
-    </div>
-
-  
-
-    login as a seller
-    <div class="seller-login"></div>
-
-    <%= errorMessage %>
-    <div>
-        <form method="POST" action="/login/seller">
-            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-            <input type="hidden" name="redirect" value="<% if (authMessage) { %>admin<% } %>">
-
-            <label for="email">email</label>
-            <input type="email" name="email" id="email" value="<%= provideEmail %>">
-
-            <label for="password">password</label>
-            <input type="password" name="password" id="password">
-
-            <button type="submit">Login</button>
-
-        </form>
-    </div>
-    <div>forget password? <a href="/reset-password/seller">Reset password</a> </div>
-
-</div>
+    
 
 </div>
    

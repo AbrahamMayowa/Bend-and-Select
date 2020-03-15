@@ -3,59 +3,80 @@
 
 <%- include('../includes/navHeader.ejs') %>
 
+<main>
 
-<form action="/admin/product-edit" method="POST" enctype="multipart/form-data">
-<input type="hidden" name="_csrf" value="<%= csrfToken %>">
-<input type="hidden" name="productId" value="<%= goods._id %>">
+    <div class="add-product-wrapper">
 
-<label for="name">name</label>
-<input type="text" name="name" id="name" value="<%= goods.name %>">
-<input type="number" name="price" id="price" value="<%= goods.price %>">
+        <div class="add-header">
+            <span class="add-icon"><i class="fas fa-plus"></i></span>
+            <span class="add-header-text">
+                Edit Product
+            </span>
+        </div>
 
-<label for="category">category</label>
-<select name="category" >
-    <option value="mobile-phone-tablet" >Mobile Phone & Tablets</option>
-    <option value="bags" >Bags</option>
-    <option value="computer-accessories" >Computer Accessories</option>
-    <option value="audio-music-equipment" >Audio & Music Equipment</option>
-    <option value="vehicle" >Vehicle</option>
-    <option value="home-appliances" >Home Appliances</option>
-    <option value="electrical-equipment" >Electrical Equipment</option>
-    <option value="electronics" >Electronics</option>
-</select>
+        <div class="add-error-message">
+            <% if(errorMessage) {%>
+            <span class="add-error-message"><%= errorMessage %></span>
+            <% } %>
+        </div>
+   
+        <div class="add-form-control">
 
-<label for="condition">condition</label>
-<select name="condition">
-    <option value="new" >New</option>
-    <option value="used" >Used</option>
-</select>
+            <form action="/admin/product-edit" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <input type="hidden" name="productId" value="<%= goods._id %>">
 
+            <input type="text" name="name" id="name" value="<%= goods.name %>" placeholder="Name">
 
-<label for="description">description</label>
-<textarea name="description" rows="11"><%= goods.description %></textarea>
-
-<label for="image">image</label>
-<input type="file" name="image">
-
-<label for="location">location</label>
-<select name="location">
-        <option value="lagos" >Lagos</option>
-        <option value="ibadan" >Ibadan</option>
-        <option value="Kano" >Kano</option>
-        <option value="port-harcourt" >Port-Harcourt</option>
-        <option value="abuja" >Abuja</option>
-        <option value="abeokuta" >Abeokuta</option>
-        <option value="calabar" >Calabar</option>
-        <option value="uyo" >Uyo</option>
-        <option value="enugu" >Enugu</option>
-
-</select>
-<button type="submit">Submit</button>        
-
-</form>
+            <input type="number" name="price" id="price" value="<%= goods.price %>" placeholder="Price">
 
 
+
+            <select name="category" required> 
+                <option value="" disabled selected>Category</option>
+                <option value="Mobile Phone" >Mobile Phone</option>
+                <option value="Bags" >Bags</option>
+                <option value="Computer Accessories" >Computer Accessories</option>
+                <option value="Audio Music Equipment" >Audio Music Equipment</option>
+                <option value="Vehicle" >Vehicle</option>
+                <option value="Home Appliances" >Home Appliances</option>
+                <option value="Electrical Equipment" >Electrical Equipment</option>
+                <option value="Electronics" >Electronics</option>
+            </select>
+
+            
+            <select name="condition" required>
+                <option value="" disabled selected>Product condition</option>
+                <option value="New" >New</option>
+                <option value="Used" >Used</option>
+            </select>
+
+        <textarea name="description" rows="11"><%= goods.description %></textarea>
+
+            <input type="file" name="image">
+
+            <select name="location" required>
+                <option value="" disabled selected>Location</option>
+                <option value="Lagos" >Lagos</option>
+                <option value="Ibadan" >Ibadan</option>
+                <option value="Kano" >Kano</option>
+                <option value="Port-Harcourt" >Port-Harcourt</option>
+                <option value="Auja" >Abuja</option>
+                <option value="Abeokuta" >Abeokuta</option>
+                <option value="Calabar" >Calabar</option>
+                <option value="Uyo" >Uyo</option>
+                <option value="Enugu" >Enugu</option>
+            </select>
+            <input class="add-submit" type="submit" value="Submit">      
+            
+            </form> 
+        
+
+        </div>
+    </div>
+</main>
 
 
 <%- include('../includes/end.ejs') %>
+
 
