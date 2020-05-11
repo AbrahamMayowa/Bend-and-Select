@@ -31,7 +31,7 @@ app.set('views', 'views');
 
 
 
-MONGODB_URL =  "mongodb+srv://bend-and-select:admin-password@cluster0-ol5r1.mongodb.net/bend-and-select?retryWrites=true&w=majority"
+MONGODB_URL =  process.env.MONGODB_URL
 
 
 // creating session document
@@ -142,5 +142,5 @@ app.use((error, req, res, next) => {
 })
 
 mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true})
-.then(response => app.listen(4000, () => console.log('working')))
+.then(() => app.listen(process.env.PORT, () => console.log('working')))
 .catch(error => console.log(error))
