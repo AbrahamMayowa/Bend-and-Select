@@ -21,6 +21,7 @@ exports.searchQuery = async(req, res, next)=>{
         productFound = await Goods.find({category: filter}).skip((perPage * page) - perPage).limit(perPage)
         availbleGoods = await Goods.countDocuments({category: filter})
     }
+    
 
     res.render('general/search', {
         products: productFound,

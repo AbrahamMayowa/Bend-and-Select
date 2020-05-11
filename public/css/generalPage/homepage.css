@@ -3,17 +3,25 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 300px;
+    height: 350px;
     width: 100%;
     color:#483D8B;
     font-family: Arial, Helvetica, sans-serif;
-    background-image: url('/public/localImages/3523548.jpg');
+    background-image: url('/public/localImages/happy-shopping.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     background-color: hsla(0, 0%, 0%, .50);
 }
-
+.advert-wrapper{
+    background-color: rgba(0, 0, 0, 0.39);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 .primary-advert{
     text-align: center;
     font-weight: 800;
@@ -27,14 +35,13 @@
 }
 
 .secondary-advert{
-    text-shadow: 1px 1px 2px white;
+    color: rgb(255, 255, 255);
     z-index: 1;
     width: 90%;
     text-align: center;
     font-weight: 400;
     font-size: 12px;
     margin-bottom: 12px;
-    color: black
 }
 
 .homepage-search-input, .form-flex{

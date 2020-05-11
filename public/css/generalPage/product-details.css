@@ -142,21 +142,21 @@ SPECIFICATION
 }
 
 .details-header{
+    font-size: 17px;
     color: gray;
-    font-weight: 800;
     margin-bottom: 8px;
     padding-left: 8px;
     margin-top: 4px;
 }
 
 .product-condition-text{
-    font-weight: 800;
-    font-size: 12px;
+   
+    font-size: 15px;
 }
 
 .product-category-text{
-    font-weight: 800;
-    font-size: 12px;
+    
+    font-size: 15px;
     padding-left: 6px;
     
 }
