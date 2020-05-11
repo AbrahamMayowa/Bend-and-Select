@@ -7,6 +7,7 @@ const session = require('express-session')
 const MongodbSession = require('connect-mongodb-session')(session)
 const flash = require('connect-flash')
 const multer = require('multer')
+require('dotenv').config()
 
 
 
@@ -65,7 +66,7 @@ const fileFilter = (req, file, cb) => {
 
 app.use(
     session({
-        secret: 'bend-and-select',
+        secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: false,
         store: store

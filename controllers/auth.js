@@ -271,7 +271,7 @@ exports.postSellerLogin = (req, res, next) => {
             buyerErrorMessage: '',
             sellerProvideEmail: email,
             buyerProvideEmail: '',
-            authMessage: redirectRoute ? redirectRoute : null
+            authMessage: redirectRoute ? 'Authorization denied for non-seller account' : null
         })
         }
 
@@ -284,7 +284,7 @@ exports.postSellerLogin = (req, res, next) => {
                 buyerErrorMessage: '',
                 sellerProvideEmail: email,
                 buyerProvideEmail: '',
-                authMessage: redirectRoute ? redirectRoute : null
+                authMessage: redirectRoute ? 'Authorization denied for non-seller account' : null
             })
         }
             req.session.isAuthenticated = true
