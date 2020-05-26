@@ -51,23 +51,19 @@
   
         <section class='item-wrapper'>
                 <% if (allGoods.length > 0) { %>
-
                     <% for (let goods of allGoods) { %>
                         <a href="/product/<%=goods._id %>" class="card-wrapper">
                            
                             <div class="goods-image">
                                 <img src='/image/<%= goods.image %>' alt="product image" />
                             </div>
-
                             <div class="name-wrapper">
                                 <div class="product-name"><%= goods.name %></div> 
                             </div>
-
                             <div class="condition-price">
                                 <div class="product-condition"><%= goods.condition %></div>
                                 <div class="product-price">#<%= goods.price %></div>
                             </div>
-
                             <div class="review-location">
                                     <div class="review">
                                         <span class="fa fa-star <%if(goods.review.reviewAverage.averageScore >= 1) {%>checked-review <%}%>"></span>
@@ -83,11 +79,9 @@
                             </div>
                         </a>
                         
-
                     <% } %>
         
                 <% } else { %>
-
                     <%- include('../includes/noItem.ejs', {}) %>
               
                 <% } %>
@@ -133,7 +127,3 @@
     </section>
 </main>
     <%- include('../includes/end.ejs') %>
-
-
-
-

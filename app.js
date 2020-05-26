@@ -119,9 +119,8 @@ app.use((req, res, next) =>{
 
 app.use((req, res, next) => {
     res.locals.csrfToken = req.csrfToken()
-    res.locals.isAuthenticated = req.session.isAuthenticated
-    res.locals.isSeller = req.session.isSeller
-
+    res.locals.isAuthenticated = req.session.isAuthenticated || false
+    res.locals.isSeller = req.session.isSeller || false
     next()
 })
 
