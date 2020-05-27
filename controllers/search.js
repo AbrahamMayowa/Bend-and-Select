@@ -7,6 +7,15 @@ exports.searchQuery = async(req, res, next)=>{
     const perPage = 5
     const filter = req.query.filter
 
+    const priceFormat = (productPrice)=>{
+        return (
+        new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'NGN'
+        }).format(productPrice)
+        )
+    }
+
     try {
         let productFound
         let availbleGoods
@@ -33,7 +42,8 @@ exports.searchQuery = async(req, res, next)=>{
         searchWord: search ? search : null,
         filter: filter ? filter : null,
         pages: Math.ceil(availbleGoods / perPage),
-        pageTitle: filter ? filter : 'Search'
+        pageTitle: filter ? filter : 'Search',
+        priceFormat
     })
 }catch(error){
     console.log(error)

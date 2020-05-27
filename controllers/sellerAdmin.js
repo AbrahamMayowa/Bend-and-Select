@@ -1,11 +1,19 @@
 const Goods = require('../models/goods')
-const imageDelete = require('../utils/deleteImage')
+const {deleteS3Image} = require('../utils/deleteS3Image')
 
 const {validationResult} = require('express-validator')
 const moment = require('moment')
 
 exports.adminHome = (req, res, next) => {
     const successInfo = req.flash('productAddSuccess')
+    const priceFormat = (productPrice)=>{
+        return (
+        new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'NGN'
+        }).format(productPrice)
+        )
+    }
     Goods.find({goodsSeller: req.user._id})
     .then(goods => {
         res.render('sellerAdmin/adminHome', {
@@ -14,6 +22,7 @@ exports.adminHome = (req, res, next) => {
             successInfo: successInfo.length > 0 ? successInfo[0] : null,
             requestUser: req.user,
             moment,
+            priceFormat
         })
     })
     .catch(error => {
@@ -65,7 +74,7 @@ exports.postAddProduct = (req, res, next)=>{
     const error = validationResult(req)
 
     if(!error.isEmpty()){
-        imageDelete(image.path)
+        deleteS3Image(image.key)
         return res.render('sellerAdmin/getAddProduct', {
             pageTitle: 'Add Product',
             name: name,
@@ -76,11 +85,8 @@ exports.postAddProduct = (req, res, next)=>{
         })
     }
 
-    let imagePath
-    if(image){
-        imagePath = image.filename
-    }
 
+    console.log(image)
     const goods = new Goods({
         name: name,
         createdDate: Date.now(),
@@ -88,7 +94,8 @@ exports.postAddProduct = (req, res, next)=>{
         condition: condition,
         price: price,
         description: description,
-        image: imagePath,
+        image: image.location,
+        imageKey: image.key,
         location: location,
         review: {
             buyerReview: [],
@@ -159,16 +166,19 @@ exports.postProductEdit = async(req, res, next)=>{
             }
         
         let imagePath = goods.image
+        let imagekey = goods.imageKey
         if(image){
-            imagePath = image.filename
-            imageDelete(`/images/${goods.image}`)
+            imagePath = image.location
+            imagekey = image.key
+            deleteS3Image(goods.imageKey)
         }
 
         goods.name = name
         goods.price = price
         goods.category = category
         goods.condition = condition
-        goods.image = imagePath
+        goods.image = imagePath,
+        goods.imageKey = imageKey
         goods.location = location,
         goods.description = description
         await goods.save()
@@ -188,7 +198,7 @@ exports.deleteProduct = async (req, res, next) => {
             return res.status(401).redirect('/401')
         }
 
-        imageDelete(`images/${goods.image}`)
+        await deleteS3Image(goods.imageKey)
         await Goods.deleteOne({_id: goods._id})
 
         req.flash('deleteProduct', 'Goods successfully deleted')

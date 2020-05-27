@@ -1,23 +1,35 @@
 const Goods = require('../models/goods')
 const moment = require('moment')
 
+
+const priceFormat = (productPrice)=>{
+    return (
+    new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'NGN'
+    }).format(productPrice)
+    )
+}
+
 exports.goodsLists = async (req, res, next) => {
     const page = req.params.page || 1
     const perPage = 6
-
-
+    
     try{
     const goods = await Goods.find()
         .skip((perPage * page) - perPage)
         .limit(perPage)
     const availableGoods = await Goods.countDocuments()
     const trending = await Goods.find().sort({review: -1}).limit(4)
+
+  
     res.render('general/homePage', {
             allGoods: goods,
             currentPage: page,
             pages: Math.ceil(availableGoods / perPage),
             trending, 
-            pageTitle: 'Home'
+            pageTitle: 'Home',
+            priceFormat
         })
     }catch(error){
         next(error)
@@ -56,7 +68,8 @@ exports.productDetails = async (req, res, next)=> {
             requestUser: req.user_id || null,
             wishlist: checkWishlist,
             productId: goods._id,
-            checkReview: checkReview
+            checkReview: checkReview,
+            priceFormat
         })
     
     }catch(error){

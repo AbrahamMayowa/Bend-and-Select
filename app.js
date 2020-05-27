@@ -7,9 +7,11 @@ const session = require('express-session')
 const MongodbSession = require('connect-mongodb-session')(session)
 const flash = require('connect-flash')
 const multer = require('multer')
+const aws = require( 'aws-sdk' )
+const multerS3 = require( 'multer-s3' )
 require('dotenv').config()
 
-
+const {s3} = require('./utils/deleteS3Image')
 
 const Seller = require('./models/seller')
 const Buyer = require('./models/buyer')
@@ -42,6 +44,9 @@ const store = new MongodbSession({
     collection: 'session'
 })
 
+
+
+
 const fileStorage = multer.diskStorage({
     destination: (req, file, cb) => {
       cb(null, 'images');
@@ -50,6 +55,19 @@ const fileStorage = multer.diskStorage({
       cb(null, new Date().toISOString() + '-' + file.originalname)
     }
     })
+
+
+const s3Storage = multerS3({
+  s3,
+  bucket: 'bend-and-select.com',
+  acl: 'public-read',
+  metadata: function(req, file, cb){
+    cb(null, {fieldName: file.fieldname})
+  },
+  key: function(req, file, cb){
+    cb(null, new Date().toISOString() + '-' + file.originalname)
+  }
+})    
 
 
 const fileFilter = (req, file, cb) => {
@@ -69,7 +87,8 @@ app.use(
         secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: false,
-        store: store
+        store: store,
+        cookie: { expires: new Date(Date.now() + (30 * 86400 * 1000))}
     })
 )
 
@@ -81,7 +100,7 @@ app.use('/image', express.static(path.join(__dirname, 'images')))
 
 // file configuraitons
 app.use(
-    multer({ storage: fileStorage, fileFilter: fileFilter }).single('image')
+    multer({ storage: s3Storage, fileFilter: fileFilter }).single('image')
   )
 
 app.use(flash())

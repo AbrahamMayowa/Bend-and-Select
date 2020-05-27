@@ -21,6 +21,11 @@ const buyerSchema = new Schema({
     image: {
         type: String,
     },
+    imageKey: {
+        type: String,
+        required: true
+    },
+
     password: {
         type: String,
         required: true

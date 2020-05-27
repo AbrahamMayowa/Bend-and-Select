@@ -33,7 +33,7 @@
                    
 
                         <div class="admin-product-image">
-                            <img src="/image/<%= goods.image %>" alt="product image">
+                            <img src="<%= goods.image %>" alt="product image">
                         </div>
 
                         <div class="product-info-action">
@@ -43,7 +43,7 @@
                                     posted:
                                     <%= moment(goods.createdDate).fromNow() %>
                                 </span>
-                                <span class="admin-info naira"># <%= goods.price %></span>
+                                <span class="admin-info naira"><%= priceFormat(goods.price) %></span>
                             </div>
 
                             <div class="admin-action">

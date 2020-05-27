@@ -15,7 +15,7 @@
                         <i class="fas fa-map-marker-alt location-icon"></i>
                         <%= productDetails.location %>
                     </div>
-                    <div class="product-price">#<%= productDetails.price %></div>
+                    <div class="product-price"><%= priceFormat(productDetails.price) %></div>
                 </div>
 
                 <div class="posted-on">
@@ -42,7 +42,7 @@
                             <div class='review-text'>Seller can't review</div>
 
                         <% } else if(!isAuthenticated && !isSeller) { %>
-                                <div class="review-text">login to review</div>
+                                <div class="review-text">Login to review</div>
 
                         <% } %>
                                   
@@ -161,17 +161,17 @@
             <div class="joined-on">
                 <div class="join-text">
                     <i class="far fa-clock"></i>
-                    Join
+                    Joined
                 </div>
-                <%= userJoined %>
+                <span class="seller-info-text"><%= userJoined %></span>
             </div>
             
             <div class="number">
                 <div class="seller-number-text">
                     <i class="fas fa-mobile-alt"></i>
-                    Seller's Number
+                    Seller's number
                 </div>
-                <%= productDetails.goodsSeller.phoneNumber %>
+                <span class="seller-info-text"><%= productDetails.goodsSeller.phoneNumber %></span>
             </div>
         </div>
     </section>

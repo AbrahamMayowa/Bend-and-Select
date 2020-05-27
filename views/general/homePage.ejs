@@ -7,7 +7,7 @@
     <section class="advert-text-search">
         <div class="advert-wrapper">
         <p class="primary-advert">Sell and Buy House Clearance Sales</p>
-        <p class="secondary-advert">Look for perfect products, contact seller and shedule the shipping</p> 
+        <p class="secondary-advert">Look for perfect products and contact seller</p> 
         <div class="homepage-search-input">
             <form method="GET" action="/search/1" class="form-flex">
             <input type="text" name="search" id="search" placeholder="Search all products">
@@ -62,7 +62,7 @@
                             </div>
                             <div class="condition-price">
                                 <div class="product-condition"><%= goods.condition %></div>
-                                <div class="product-price">#<%= goods.price %></div>
+                                <div class="product-price"><%= priceFormat(goods.price) %></div>
                             </div>
                             <div class="review-location">
                                     <div class="review">

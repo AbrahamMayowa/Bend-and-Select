@@ -9,7 +9,7 @@ const crypto = require('crypto')
 
 
 const {validationResult} = require('express-validator')
-const imageDelete = require('../utils/deleteImage')
+const {deleteS3Image} = require('../utils/deleteS3Image')
 
 
 
@@ -47,6 +47,9 @@ exports.buyerSignUp = (req, res, next) => {
     const error = validationResult(req)
 
     if (!error.isEmpty()){
+        if(image){
+            deleteS3Image(image.key)
+        }
         console.log(error.array())
         return res.status(422).render('auth/buyerSignUp', {
             pageTitle: 'Sign Up',
@@ -54,16 +57,14 @@ exports.buyerSignUp = (req, res, next) => {
         })
     }
 
-    let imagePath;
-    if (image){
-        imagePath = image.filename
-    } 
+
     bcrypt.hash(password, 12)
     .then(hashedPassword =>{
             const buyer = new Buyer({
             email: email,
             phoneNumber: phoneNumber,
-            image: imagePath,
+            image: image.location,
+            imageKey: image.key,
             username: username,
             password: hashedPassword,
             wishList: []
@@ -113,14 +114,14 @@ exports.sellerSignUp = (req, res, next) => {
     const errors = validationResult(req)
 
     if(!errors.isEmpty()){
-        imageDelete(image.path)
+       deleteS3Image(image.key)
         return res.status(422).render('auth/sellerSignUp', {
             pageTitle: 'Sign Up',
             errorMessage: errors.array()[0].msg
         })
     }
 
-    const imagePath = image.filename;
+
     
     bcrypt.hash(password, 12)
         .then(hashedPassword =>{
@@ -128,7 +129,8 @@ exports.sellerSignUp = (req, res, next) => {
                 name: name,
                 email: email,
                 phoneNumber: phoneNumber,
-                image: imagePath,
+                image: image.location,
+                imageKey: image.key,
                 password: hashedPassword
         
             })

@@ -25,7 +25,10 @@ const goodsSchema = new Schema({
     image: {
         type: String,
         required: true
-
+    },
+    imageKey: {
+        type: String,
+        required: true
     },
 
     location: {

@@ -22,6 +22,11 @@ const sellerSchema = new Schema({
        type: String,
        required: true
     },
+    imageKey: {
+        type: String,
+        required: true
+    },
+
 
     joined: {
         type: Date,

@@ -31,10 +31,13 @@
     color: white;
 }
 
+.signup-redirect div{
+    text-align: center;
+}
+
 
 .signup-icon{
     color: white;
-    margin-right: 12px;
 }
 
 

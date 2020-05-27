@@ -116,6 +116,10 @@ cursor: pointer;
     padding: 3px;
 }
 
+.wishlist-text{
+    font-size: 13px;
+}
+
 /*
 SPECIFICATION
 */
@@ -142,21 +146,21 @@ SPECIFICATION
 }
 
 .details-header{
-    font-size: 17px;
+    font-size: 15px;
     color: gray;
     margin-bottom: 8px;
     padding-left: 8px;
-    margin-top: 4px;
+    margin-top: 8px;
 }
 
 .product-condition-text{
    
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .product-category-text{
     
-    font-size: 15px;
+    font-size: 14px;
     padding-left: 6px;
     
 }
@@ -185,6 +189,7 @@ Description
     padding: 12px;
     text-overflow: clip;
     height: 130px;
+    font-size: 15px;
 }
 
 
@@ -309,7 +314,7 @@ Seller Details
 .join-text{
     font-weight: 800;
     color: #483D8B;
-    font-size: 16px;
+    font-size: 13px;
     margin-bottom: 3px;
 }
 
@@ -323,9 +328,11 @@ Seller Details
     margin-bottom: 3px;
     color: #483D8B;
     font-weight: 800;
-    font-size: 16px;
+    font-size: 13px;
 }
-
+.seller-info-text{
+    font-size: 13px;
+}
 
 /*
 
@@ -447,6 +454,16 @@ FOR 700 AND ABOVE SCREEN
 
     .image-info .product-image{
         height: 450px;
+    }
+
+    .join-number{
+        width: 100%;
+        border-top: none;
+        border-bottom: none;
+    }
+
+    .joined-on{
+        border-right: none;
     }
 
     .form-review{

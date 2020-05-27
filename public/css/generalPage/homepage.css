@@ -25,27 +25,29 @@
 .primary-advert{
     text-align: center;
     font-weight: 800;
-    font-size: 25px;
+    font-size: 18px;
     margin-bottom: 6px;
     margin-top: 25px;
     z-index: 1;
     text-shadow: 1px 1px 4px #483D8B;
     color: white;
+    font-family: 'Roboto', sans-serif;
 
 }
 
 .secondary-advert{
-    color: rgb(255, 255, 255);
+    color: rgb(235, 231, 231);
     z-index: 1;
     width: 90%;
     text-align: center;
     font-weight: 400;
     font-size: 12px;
-    margin-bottom: 12px;
+
+    font-family: 'Noto Sans JP', sans-serif;
 }
 
 .homepage-search-input, .form-flex{
-    margin-top: 5px;
+   margin-top: -12px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -138,7 +140,7 @@ PRODUCT LIST SECTION
 
 .card-wrapper{
     height: 300px;
-    width: 80%;
+    width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -324,6 +326,14 @@ FOR 700 AND ABOVE SCREEN
 @media screen and (min-width: 700px) {
     .homepage-search-input input[type='text']{
         width: 500px;
+    }
+
+    .primary-advert{
+        font-size: 22px;
+    }
+
+    .secondary-advert{
+        font-size: 15px;
     }
 
     .filter-item{
