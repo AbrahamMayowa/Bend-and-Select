@@ -7,7 +7,7 @@
 
     <div class="product-details-wrapper">
         <section class="image-info">
-            <div class="product-image"><img src="/image/<%= productDetails.image %>" alt="product image" /></div>
+            <div class="product-image"><img src="<%= productDetails.image %>" alt="product image" /></div>
             <div class="name-location-price-action">
                 <div class="product-name"><%= productDetails.name %></div>
                 <div class="location-price">
@@ -153,7 +153,7 @@
     
     <section class="seller-details">
         <div class="seller-image-name">
-            <div class="seller-image"><img src="/image/<%= productDetails.goodsSeller.image %>" /></div>
+            <div class="seller-image"><img src="<%= productDetails.goodsSeller.image %>" /></div>
             <span class="seller-name"><%= productDetails.goodsSeller.name %></span>
         </div>
 

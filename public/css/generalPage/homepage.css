@@ -106,6 +106,7 @@ PRODUCT LIST SECTION
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
     margin-bottom: 20px;
 }
 
@@ -114,10 +115,15 @@ PRODUCT LIST SECTION
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 12%;
-    height: 50px;
+    width: 12vw;
+    height: 12vw;
+    border-radius: 50%;
+    border: 1px solid #483D8B;
     font-size: 20px;
     margin-bottom: 7px;
+    margin-top: 7px;
+    margin-left: 6px;
+  
 }
 
 .category-text{
