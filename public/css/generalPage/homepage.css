@@ -104,20 +104,21 @@ PRODUCT LIST SECTION
 
 .filter{
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     margin-bottom: 20px;
+    width: 100%;
 }
 
 .filter-item{
+    background-color: white;
     color: #483D8B;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 12vw;
-    height: 12vw;
-    border-radius: 50%;
+    height: 40px;
+    border-radius: 5px;
     border: 1px solid #483D8B;
     font-size: 20px;
     margin-bottom: 7px;
@@ -126,13 +127,19 @@ PRODUCT LIST SECTION
   
 }
 
-.category-text{
+.list-icon{
+    font-size: 14px;
+}
+
+.category-text, .item-list-header{
+    align-self: start;
     width: 100%;
-    text-align: center;
     font-weight: 800;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
-    padding-top: 12px;
+    padding-left: 12px;
+    margin-top: 14px;
+
 }
 
 .item-wrapper{
@@ -142,6 +149,10 @@ PRODUCT LIST SECTION
     flex-direction: column;
     width: 100%;
 
+}
+
+.item-list-header{
+    margin-bottom: 8px;
 }
 
 .card-wrapper{
@@ -198,6 +209,7 @@ a{
 
 .product-condition{
     margin-left: 7px;
+    font-size: 12px;
 }
 
 .checked-review{
@@ -210,6 +222,7 @@ a{
 
 .location{
     margin-right: 7px;
+    font-size: 12px;
 }
 
 .location-icon{
@@ -342,23 +355,39 @@ FOR 700 AND ABOVE SCREEN
         font-size: 15px;
     }
 
+    .filter{
+        width: 80%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     .filter-item{
         height: 100px;
         width: 8%;
     }
 
-    .category-text{
+    .list-icon{
+        font-size: 27px;
+    }
+
+    .category-text, .item-list-header{
         font-size: 22px;
-        margin-bottom: 0px;
+        width: 80%;
+        text-align: center;
+        margin: 0 auto;
+        padding-top: 30px;
     }
 
     .item-wrapper{
         flex-direction: row;
         padding: 10px;
-        width: 100%;
-        justify-content: center;
+        width: 80%;
+     
         align-items: center;
         flex-wrap: wrap;
+        margin: 0 auto
     
     }
     .card-wrapper{
@@ -366,6 +395,7 @@ FOR 700 AND ABOVE SCREEN
         border-radius: 12px;
         overflow: hidden;
         width: 25%;
+        max-width: 400px;;
 
     }
 

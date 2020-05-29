@@ -18,38 +18,39 @@
     </section>
 
     <section class="item-list">
-        <div class="category-text">categories</div>
+        <div class="category-text">Categories</div>
         <div class="filter">
             <a href="/search/1?filter=Mobile+Phone" class="filter-item">
-                <i class="fas fa-mobile fa-lg"></i>
+                <i class="fas fa-mobile list-icon"></i>
             </a>
 
             <a href="/search/1?filter=Bags" class="filter-item">
-                <i class="fas fa-shopping-bag fa-lg"></i>
+                <i class="fas fa-shopping-bag list-icon"></i>
             </a>
 
             <a href="/search/1?filter=Computer+Accessories" class="filter-item">
-                    <i class="fas fa-desktop fa-lg"></i>
+                    <i class="fas fa-desktop list-icon"></i>
             </a>
 
             <a href="/search/1?filter=Audio+Music+Equipment" class="filter-item">
-                    <i class="fas fa-headphones-alt fa-lg"></i>
+                    <i class="fas fa-headphones-alt list-icon"></i>
             </a>
 
             <a href="/search/1?filter=Vehicle" class="filter-item">
-                    <i class="fas fa-car fa-lg"></i>
+                    <i class="fas fa-car list-icon"></i>
             </a>
             
             <a href="/search/1?filter=Home+Appliances" class="filter-item">
-                    <i class="fas fa-blender-phone fa-lg"></i>
+                    <i class="fas fa-blender-phone list-icon"></i>
             </a>
 
             <a href="/search/1?filter=Electrical+Equipment" class="filter-item">
-                    <i class="fas fa-charging-station fa-lg"></i>
+                    <i class="fas fa-charging-station list-icon"></i>
             </a>
         </div>
   
         <section class='item-wrapper'>
+                <div class="item-list-header">Products</div>
                 <% if (allGoods.length > 0) { %>
                     <% for (let goods of allGoods) { %>
                         <a href="/product/<%=goods._id %>" class="card-wrapper">
